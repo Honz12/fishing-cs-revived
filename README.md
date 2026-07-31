@@ -131,10 +131,6 @@ src/
 
 ## 👥 Autoři
 
-Tento "revive" projektu vytváří **Honz12**
-
-Původní autoři `Honz12/fishing-cs-hackathon`
-
 | Jméno | Role |
 |---|---|
 | **Honz12** 🧑‍💻 | Hlavní programátor — herní mechaniky, minihra, vykreslování |
