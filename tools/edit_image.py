@@ -184,7 +184,10 @@ class Editor:
         buf.append(self.render_selection_marker())
         buf.append(self.info_line())
         buf.append(
-            "[Arrows] move  [Space] draw  [B] fill  [E] erase  [Tab] color  "
+            "[Arrows] move  [Space/L-click] draw  [R-click] erase  "
+            "[B] fill  [E] erase  [Tab] color"
+        )
+        buf.append(
             "[Z] undo  [R] redo  [S] save  [Ctrl+A] save as  "
             "[O] open  [Q] quit"
         )
@@ -204,8 +207,12 @@ class Editor:
         mode[6][termios.VMIN] = 1
         mode[6][termios.VTIME] = 0
         termios.tcsetattr(self.fd, termios.TCSANOW, mode)
+        sys.stdout.write("\x1b[?1002h\x1b[?1006h")
+        sys.stdout.flush()
 
     def restore_terminal(self):
+        sys.stdout.write("\x1b[?1002l\x1b[?1006l")
+        sys.stdout.flush()
         termios.tcsetattr(self.fd, termios.TCSADRAIN, self.old_termios)
 
     def hide_cursor(self):
@@ -245,6 +252,8 @@ class Editor:
                 seq += b
                 if 0x40 <= b[0] <= 0x7E:
                     break
+            if seq.startswith(b"[<"):
+                return self.parse_mouse(seq)
             return {
                 b"[A": "up", b"[B": "down",
                 b"[C": "right", b"[D": "left",
@@ -256,6 +265,35 @@ class Editor:
                 b"OC": "right", b"OD": "left",
             }.get(seq)
         return "alt_" + b1.decode("latin-1", errors="replace")
+
+    def parse_mouse(self, seq):
+        """Parse SGR mouse sequence: ESC [ < button ; x ; y (M|m)."""
+        parts = seq[2:].split(b";")
+        if len(parts) != 3 or len(parts[2]) < 2:
+            return None
+        try:
+            button = int(parts[0])
+            x = int(parts[1])
+            y = int(parts[2][:-1])
+        except ValueError:
+            return None
+        return ("mouse", button, x, y, seq[-1:] == b"M")
+
+    def handle_mouse(self, button, x, y, press):
+        base = button & 3
+        if y == GRID_SIZE + 3:
+            if press and base == 0:
+                index = (x - 10) // 2
+                if 0 <= index < GRID_SIZE:
+                    self.color = "0123456789ABCDEF"[index]
+            return
+        if 2 <= y <= GRID_SIZE + 1:
+            gx = (x - 2) // 2
+            gy = y - 2
+            if 0 <= gx < GRID_SIZE and 0 <= gy < GRID_SIZE:
+                self.cx, self.cy = gx, gy
+                if press and base in (0, 2):
+                    self.paint("0" if base == 2 else self.color)
 
     def prompt(self, message):
         self.show_cursor()
@@ -396,6 +434,11 @@ class Editor:
                 self.draw()
                 key = self.read_key()
                 if key is None:
+                    continue
+                if isinstance(key, tuple):
+                    if key[0] == "mouse":
+                        _, button, mx, my, press = key
+                        self.handle_mouse(button, mx, my, press)
                     continue
                 if key == "up":
                     self.cy = max(0, self.cy - 1)

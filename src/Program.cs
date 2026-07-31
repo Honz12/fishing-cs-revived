@@ -17,7 +17,6 @@ class PlayerData
 
 class Program
 {
-
     // Constants
 
     public const string TITLE_COLOR = "\x1b[92m";
@@ -307,8 +306,25 @@ class Program
         SayBoy("Položíš telefon bez odpovědi, usměješ se a řekneš si:");
 
         SayBoy("A teď už vím, kde ty ryby jsou!");
+    }
 
+    /// <summary>
+    /// Display game credits
+    /// </summary>
+    public static void DisplayCredits()
+    {
+        Console.Clear();
+        string credits = @"=== Kde Jsou Ryby ===
+Vytvořeno v C# pro .NET 10
 
+Vývojáři:
+- Honz12               : Engine kód
+- mistrmatej           : Game design
+- sebastianjecny-green : Grafika
+        (pouze součástí původního projektu)
+";
+        DisplayImage(new Image("ui", "csLogo.txt"), credits);
+        Console.ReadKey(true);
     }
 
     /// <summary>
@@ -317,6 +333,8 @@ class Program
     /// </summary>
     public static void Main()
     {
+        DisplayCredits();
+    
         DisplayTragicBackstory();
 
         shopSeller = new Image("characters", (new string[]
