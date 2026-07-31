@@ -1,5 +1,7 @@
 # 🎣 Kde Jsou Ryby?!
 
+Tento projekt je založený na `Honz12/fishing-cs-hackathon`
+
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?style=flat&logo=dotnet)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![C#](https://img.shields.io/badge/C%23-12.0-239120?style=flat&logo=csharp)
@@ -128,6 +130,10 @@ src/
 ---
 
 ## 👥 Autoři
+
+Tento "revive" projektu vytváří **Honz12**
+
+Původní autoři `Honz12/fishing-cs-hackathon`
 
 | Jméno | Role |
 |---|---|
