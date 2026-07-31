@@ -6,9 +6,9 @@ class Shop
     private const int TOTAL_OPTIONS = 4;
 
     // Helper methods for price calculation.
-    public static uint GetRodUpgradeCost(ushort currentLevel) => (uint)((currentLevel + 1) * 500);
-    public static uint GetInventoryUpgradeCost(byte currentSize) => (uint)((currentSize + 1) * 750);
-    public static uint GetHouseUpgradeCost(byte houseLevel) => (uint)((houseLevel + 1) * 10000);
+    public static uint GetRodUpgradeCost(ushort currentLevel) => (uint)((currentLevel + 1) * 250);
+    public static uint GetInventoryUpgradeCost(byte currentSize) => (uint)((currentSize + 1) * 270);
+    public static uint GetHouseUpgradeCost(byte houseLevel) => (uint)((houseLevel + 1) * 1000);
 
     public static void DisplayShop(PlayerData playerData, Image character)
     {
