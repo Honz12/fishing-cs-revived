@@ -586,5 +586,9 @@ class Program
         {
             catchingVel = Rng.Next(0, 2) * 2 - 1;
         }
+        else
+        {
+        	catchingVel = 0;
+        }
     }
 }
