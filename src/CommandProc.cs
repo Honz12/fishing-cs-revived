@@ -15,6 +15,7 @@ Commands:
     upgrade house <level>           Sets the upgrade level of the house.
     fish list                       Lists all available fish.
     fish add <fish_id>              Adds a fish to the player's inventory.
+    advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
 ";
 
     public static void Enter(PlayerData playerData)
@@ -77,6 +78,9 @@ Commands:
                     case "help":
                         Console.Write(helpString);
                         break;
+                    case "advrefresh":
+                        Program.CheckForNewAdvancements();
+                        break;
                 }
                 break;
             case 2:
@@ -130,11 +134,6 @@ Commands:
                             }
                         }
                         break;
-                }
-                break;
-            case 4:
-                switch (parts[0])
-                {
                     case "fish":
                         if (parts[1] == "add")
                         {
