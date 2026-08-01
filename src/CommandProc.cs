@@ -13,6 +13,8 @@ Commands:
     upgrade rod <level>             Sets the upgrade level of the fishing rod.
     upgrade ship <level>            Sets the upgrade level of the ship.
     upgrade house <level>           Sets the upgrade level of the house.
+    fish list                       Lists all available fish.
+    fish add <fish_id>              Adds a fish to the player's inventory.
 ";
 
     public static void Enter(PlayerData playerData)
@@ -78,36 +80,71 @@ Commands:
                 }
                 break;
             case 2:
-                if (parts[0] == "money")
+                switch (parts[0])
                 {
-                    bool success = int.TryParse(parts[1], out int v);
+                    case "money":
+                        {
+                            bool success = int.TryParse(parts[1], out int v);
 
-                    if (success)
-                        data.Money = (uint) v;
+                            if (success)
+                                data.Money = (uint) v;
+                        }
+                        break;
+                    case "fish":
+                        if (parts[1] == "list")
+                        {
+                            Console.WriteLine("Available fish:");
+                            Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
+                            for (int i = 0; i < FishData.fishes.Length; i++)
+                            {
+                                TFish fish = FishData.fishes[i];
+                                Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
+                            }
+                        }
+                        break;
                 }
                 break;
             case 3:
-                if (parts[0] == "upgrade")
+                switch (parts[0])
                 {
-                    bool success = int.TryParse(parts[2], out int v);
-                    
-                    if (parts[1] == "rod")
-                    {
-                        if (success)
-                            data.RodLevel = (ushort) v;
-                    }
-                    
-                    if (parts[1] == "ship")
-                    {
-                        if (success)
-                            data.InventorySize = (byte) v;
-                    }
-                    
-                    if (parts[1] == "house")
-                    {
-                        if (success)
-                            data.HouseLevel = (byte) v;
-                    }
+                    case "upgrade":
+                        {
+                            bool success = int.TryParse(parts[2], out int v);
+
+                            if (parts[1] == "rod")
+                            {
+                                if (success)
+                                    data.RodLevel = (ushort) v;
+                            }
+
+                            else if (parts[1] == "ship")
+                            {
+                                if (success)
+                                    data.InventorySize = (byte) v;
+                            }
+                            
+                            else if (parts[1] == "house")
+                            {
+                                if (success)
+                                    data.HouseLevel = (byte) v;
+                            }
+                        }
+                        break;
+                }
+                break;
+            case 4:
+                switch (parts[0])
+                {
+                    case "fish":
+                        if (parts[1] == "add")
+                        {
+                            bool success = int.TryParse(parts[2], out int v);
+
+                            if (success)
+                                if (v >= 0 && v < FishData.fishes.Length)
+                                    Program.data.Inventory.Add(new Fish(FishData.fishes[v]));
+                        }
+                        break;
                 }
                 break;
         }
