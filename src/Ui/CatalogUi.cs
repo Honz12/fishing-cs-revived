@@ -6,6 +6,68 @@ namespace fishing_cs_revived.src.Ui
     {
         static readonly List<int> unlockedFishIds = [];
 
+        private static void DisplayTableRarity(FishRarity rarity)
+        {
+            Console.WriteLine("===== " + Program.GetTransRarity(rarity) + " =====");
+
+            string line = "";
+            string unknown = "???";
+
+            int j = 0;
+
+            for (int i = 0; i < FishData.fishes.Length; i++)
+            {
+                TFish tFish = FishData.fishes[i];
+                if (tFish.Rarity != rarity)
+                    continue;
+
+                if (unlockedFishIds.Contains(i))
+                    line += $"{tFish.Name,-20} | ";
+                else
+                    line += $"\x1b[0;90m{unknown,-20}\x1b[0m | ";
+                
+                if (j % 3 == 2)
+                {
+                    Console.WriteLine("| " + line);
+                    line = "";
+                }
+                j++;
+            }
+            if (line.Length != 0)
+                Console.WriteLine("| " + line);
+        }
+
+        private static void DisplayTableRarityOther()
+        {
+            Console.WriteLine("===== Jiné =====");
+
+            string line = "";
+            string unknown = "???";
+
+            int j = 0;
+
+            for (int i = 0; i < FishData.fishes.Length; i++)
+            {
+                TFish tFish = FishData.fishes[i];
+                if (tFish.Rarity != FishRarity.Kraken)
+                    continue;
+
+                if (unlockedFishIds.Contains(i))
+                    line += $"{tFish.Name,-20} | ";
+                else
+                    line += $"\x1b[0;90m{unknown,-20}\x1b[0m | ";
+                
+                if (j % 3 == 2)
+                {
+                    Console.WriteLine("| " + line);
+                    line = "";
+                }
+                j++;
+            }
+            if (line.Length != 0)
+                Console.WriteLine("| " + line);
+        }
+
         public static void ShowCatalog()
         {
             string title = Program.TITLE_COLOR + @"  _  __     _        _             ___      _    
@@ -16,26 +78,11 @@ namespace fishing_cs_revived.src.Ui
             
             Console.WriteLine(title);
 
-            string line = "";
-            string unknown = "???";
-
-            for (int i = 0; i < FishData.fishes.Length; i++)
-            {
-                TFish tFish = FishData.fishes[i];
-
-                if (unlockedFishIds.Contains(i))
-                    line += $"Name: {tFish.Name,-20} Rarity: {Program.GetTransRarity(tFish.Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(tFish.Rarity).Length)} | ";
-                else
-                    line += $"\x1b[0;90mName: {unknown,-20} Rarity: {unknown,-12}\x1b[0m | ";
-                
-                if (i % 2 == 1)
-                {
-                    Console.WriteLine("| " + line);
-                    line = "";
-                }
-            }
-            if (line.Length != 0)
-                Console.WriteLine("| " + line);
+            DisplayTableRarity(FishRarity.Common);
+            DisplayTableRarity(FishRarity.Rare);
+            DisplayTableRarity(FishRarity.Epic);
+            DisplayTableRarity(FishRarity.Mythic);
+            DisplayTableRarityOther();
         }
 
         public static void UnlockFish(int fishId)

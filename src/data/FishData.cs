@@ -19,6 +19,15 @@ namespace fishing_cs_revived.src.Data
         }
     */
 
+     /*
+        Total 22 fish:
+            - Common: 8 (Kapr, Okoun, Lín, Amur, Treska, Sardinka, Sleď, Makrela)
+            - Rare: 8 (Pstruh, Štika, Candát, Sumec, Jeseter, Losos, Platýs, Pražman)
+            - Epic: 3 (Úhoř, Mořský ďas, Mečoun)
+            - Mythic: 2 (Tuňák, Čtverzubec)
+            - Kraken: 1
+    */
+
     public class FishData
     {
         public static TFish[] fishes = {
