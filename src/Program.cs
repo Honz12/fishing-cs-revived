@@ -314,7 +314,7 @@ class Program
     public static void DisplayCredits()
     {
         Console.Clear();
-        string credits = @"=== Kde Jsou Ryby ===
+        string credits = @" === Kde Jsou Ryby ===
 Vytvořeno v C# pro .NET 10
 
 Vývojáři:
@@ -323,7 +323,41 @@ Vývojáři:
 - sebastianjecny-green : Grafika
         (pouze součástí původního projektu)
 ";
+        string mistrmatejText = @" === Vývojáři ===
+mistrmatej
+- Udělal Obchod.
+- Balancoval hru.
+- Vytvořil všechny data ryb.
+";
+        string honz12Text = @" === Vývojáři ===
+Honz12
+- Udělal engine hry.
+- Přispěl pár obrázky pro grafiku.
+- Obnovil projekt fishing-cs-hackathon.
+";
+        string sebastianjecnyText = @" === Vývojáři ===
+sebastianjecny-green
+- Udělal všechnu grafiku původní hry.
+- Vytvořil nápady pro několik systémů.
+- Pracoval jen na původním projektu.
+";
+
         DisplayImage(new Image("ui", "csLogo.txt"), credits);
+        Console.ReadKey(true);
+        DisplayImage(
+            new Image("ui", "iconHonz12.txt"),
+            honz12Text
+        );
+        Console.ReadKey(true);
+        DisplayImage(
+            new Image("ui", "iconMistrmatej.txt"),
+            mistrmatejText
+        );
+        Console.ReadKey(true);
+        DisplayImage(
+            new Image("ui", "iconSebastianjecny.txt"),
+            sebastianjecnyText
+        );
         Console.ReadKey(true);
     }
 
