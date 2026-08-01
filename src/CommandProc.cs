@@ -7,7 +7,7 @@ class CommandProc
     private static string helpString = @"Kde Jsou Ryby!? Debug Command Interface
 
 Commands:
-    quit                            Exits the Kde Jsou Ryby!? Debug Command Interface.
+    quit or exit                           Exits the Kde Jsou Ryby!? Debug Command Interface.
     help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
     money <amount>                  Sets the money of the player.
     upgrade rod <level>             Sets the upgrade level of the fishing rod.
@@ -72,6 +72,10 @@ Commands:
                 switch (parts[0])
                 {
                     case "quit":
+                        Console.CursorVisible = false;
+                        running = false;
+                        break;
+                    case "exit":
                         Console.CursorVisible = false;
                         running = false;
                         break;
