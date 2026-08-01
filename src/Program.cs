@@ -13,6 +13,7 @@ class PlayerData
     public List<Fish> Inventory = new();
 
     public GameState GameState = GameState.BootScreen;
+    public List<Advancement> Advancements = [];
 }
 
 class Program
@@ -623,6 +624,19 @@ sebastianjecny-green
                     {
                         Console.Clear();
 
+                        AdvancementUi.Display();
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case ConsoleKey.UpArrow:
+                                AdvancementUi.UiButtonMenuUp();
+                                break;
+                            case ConsoleKey.DownArrow:
+                                AdvancementUi.UiButtonMenuDown();
+                                break;
+                            case ConsoleKey.Escape:
+                                data.GameState = GameState.MainMenu;
+                                break;
+                        }
                     }
                     break;
             }

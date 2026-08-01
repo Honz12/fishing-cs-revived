@@ -1,6 +1,6 @@
 class InventoryUi
 {
-    public static int selected = 0;
+    public static int Selected = 0;
 
     /// <summary>
     /// Display the UI.
@@ -29,7 +29,7 @@ Program.TITLE_COLOR + @"  \___|_||_|_\__,_\__,_|_\__|_| |___/\___/_\_\" + "\x1b[
 
         for (int i = 0; i < playerData.Inventory.Count; i++)
         {
-            if (selected == i)
+            if (Selected == i)
             {
                 Console.WriteLine();
                 Program.DisplayImage(playerData.Inventory[i].Image, playerData.Inventory[i].GetFormatedData() + " \x1b[1;37m[S pro Prodání ryby]", "\x1b[96m");
@@ -49,9 +49,9 @@ Program.TITLE_COLOR + @"  \___|_||_|_\__,_\__,_|_\__|_| |___/\___/_\_\" + "\x1b[
     public static void UiButtonMenuDown(PlayerData playerData)
     {
         if (playerData.Inventory.Count == 0) return;
-        selected++;
-        selected += playerData.Inventory.Count;
-        selected %= playerData.Inventory.Count;
+        Selected++;
+        Selected += playerData.Inventory.Count;
+        Selected %= playerData.Inventory.Count;
     }
 
     /// <summary>
@@ -61,9 +61,9 @@ Program.TITLE_COLOR + @"  \___|_||_|_\__,_\__,_|_\__|_| |___/\___/_\_\" + "\x1b[
     public static void UiButtonMenuUp(PlayerData playerData)
     {
         if (playerData.Inventory.Count == 0) return;
-        selected--;
-        selected += playerData.Inventory.Count;
-        selected %= playerData.Inventory.Count;
+        Selected--;
+        Selected += playerData.Inventory.Count;
+        Selected %= playerData.Inventory.Count;
     }
 
     /// <summary>
@@ -76,11 +76,11 @@ Program.TITLE_COLOR + @"  \___|_||_|_\__,_\__,_|_\__|_| |___/\___/_\_\" + "\x1b[
 
         Console.Clear();
 
-        selected %= playerData.Inventory.Count;
+        Selected %= playerData.Inventory.Count;
 
-        playerData.Money += (uint) (playerData.Inventory[selected].PricePerKg * playerData.Inventory[selected].Weight);
+        playerData.Money += (uint) (playerData.Inventory[Selected].PricePerKg * playerData.Inventory[Selected].Weight);
 
-        playerData.Inventory.RemoveAt(selected);
-        selected = Math.Max(0, selected - 1);
+        playerData.Inventory.RemoveAt(Selected);
+        Selected = Math.Max(0, Selected - 1);
     }
 }
