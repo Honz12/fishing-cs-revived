@@ -1,5 +1,9 @@
 Tohle je plán pro funkce Kde Jsou Ryby
 
+- TECHNICAL
+    - Změnit Successfully Cathing Ticks promenou z UINT na INT
+    - Zmenit "ryba utekla" logiku
+
 - Udělat systém lokací
 	- Každá lokace má exkluzivní ryby
 	- Odemikají se penězi

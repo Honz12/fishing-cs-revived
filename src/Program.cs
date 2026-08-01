@@ -358,7 +358,6 @@ sebastianjecny-green
             new Image("ui", "iconSebastianjecny.txt"),
             sebastianjecnyText
         );
-        Console.ReadKey(true);
     }
 
     /// <summary>
