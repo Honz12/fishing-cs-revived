@@ -1,12 +1,30 @@
 import argparse
 import os
+import subprocess
 import sys
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+proj_mode = input("If you want to analyze the whole project enter `proj`: ") == "proj"
+
+
+def get_ignored_paths(candidates):
+    if not candidates:
+        return set()
+    payload = b"\0".join(p.encode("utf-8") for p in candidates) + b"\0"
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(BASE_DIR), "check-ignore", "-z", "--stdin"],
+            input=payload,
+            capture_output=True,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return set()
+    return {line.decode("utf-8") for line in result.stdout.split(b"\0") if line}
 
 
 def count_lines(file_path):
@@ -44,7 +62,7 @@ def main():
         "src_dir",
         type=str,
         nargs="?",
-        default=str(BASE_DIR / "src"),
+        default=str(BASE_DIR) if proj_mode else str(BASE_DIR / "src"),
         help="Path to the src directory (default: ../src).",
     )
     args = parser.parse_args()
@@ -55,23 +73,32 @@ def main():
 
     rows = []
     ext_stats = {}
-    for root, dirs, files in os.walk(src_path):
+    files = []
+    for root, dirs, walk_files in os.walk(src_path):
         root_path = Path(root)
-        for name in sorted(files):
-            file_path = root_path / name
-            size = file_path.stat().st_size
-            lines = count_lines(file_path)
-            rows.append(
-                (
-                    str(file_path.relative_to(src_path)),
-                    size,
-                    lines if lines is not None else "-",
-                )
+        for name in sorted(walk_files):
+            files.append(root_path / name)
+
+    candidates = [os.path.relpath(f, BASE_DIR).replace("\\", "/") for f in files]
+    ignored = get_ignored_paths(candidates)
+
+    for file_path in files:
+        rel = os.path.relpath(file_path, BASE_DIR).replace("\\", "/")
+        if rel == ".git" or rel.startswith(".git/") or rel in ignored:
+            continue
+        size = file_path.stat().st_size
+        lines = count_lines(file_path)
+        rows.append(
+            (
+                str(file_path.relative_to(src_path)),
+                size,
+                lines if lines is not None else "-",
             )
-            ext = file_path.suffix.lower() or "(no ext)"
-            stats = ext_stats.setdefault(ext, {"bytes": 0, "lines": 0})
-            stats["bytes"] += size
-            stats["lines"] += lines or 0
+        )
+        ext = file_path.suffix.lower() or "(no ext)"
+        stats = ext_stats.setdefault(ext, {"bytes": 0, "lines": 0})
+        stats["bytes"] += size
+        stats["lines"] += lines or 0
 
     print(format_table(rows))
     print()
