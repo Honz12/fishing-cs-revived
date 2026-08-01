@@ -1,23 +1,28 @@
+using fishing_cs_revived.src.Data;
+
 namespace fishing_cs_revived.src.Ui
 {
     public class CatalogUi
     {
+        static readonly List<int> unlockedFishIds = [];
+
         public static void ShowCatalog()
         {
-            Console.Clear();
-            Console.WriteLine("Katalog, jakákoliv klávesa pro pokračování:\n");
-            Console.WriteLine("1. Rybářské potřeby");
-            Console.WriteLine("2. Oblečení");
-            Console.WriteLine("3. Elektronika");
-            Console.WriteLine("4. Nábytek");
-            Console.WriteLine("5. Knihy");
-            Console.WriteLine("6. Hračky");
-            Console.WriteLine("7. Sportovní vybavení");
-            Console.WriteLine("8. Domácí potřeby");
-            Console.WriteLine("9. Zahradní nářadí");
-            Console.WriteLine("10. Auto-moto příslušenství");
-            Console.WriteLine("\nStiskněte jakoukoliv klávesu pro návrat do hlavního menu...");
-            Console.ReadKey(true);
+            for (int i = 0; i < FishData.fishes.Length; i++)
+            {
+                TFish tFish = FishData.fishes[i];
+
+                if (unlockedFishIds.Contains(i))
+                    Console.WriteLine($"Name: {tFish.Name,-20}, Rarity: {tFish.Rarity}");
+                else
+                    Console.WriteLine($"Name: ???, Rarity: ???");
+            }
+        }
+
+        public static void UnlockFish(int fishId)
+        {
+            if (!unlockedFishIds.Contains(fishId))
+                unlockedFishIds.Add(fishId);
         }
     }
 }
