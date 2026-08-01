@@ -185,12 +185,16 @@ namespace fishing_cs_revived.src.Ui
                                         {
                                             CatalogUi.UnlockFish(i);
                                         }
+                                        Console.WriteLine("Added all entries to catalog.");
                                         break;
                                     }
                                     bool success = int.TryParse(parts[2], out int v);
 
                                     if (success)
+                                    {
                                         CatalogUi.UnlockFish(v);
+                                        Console.WriteLine("Added an entry to catalog.");
+                                    }
                                 }
                                 else if (parts[1] == "rem")
                                 {
@@ -201,12 +205,16 @@ namespace fishing_cs_revived.src.Ui
                                         {
                                             CatalogUi.UnUnlockFish(i);
                                         }
+                                        Console.WriteLine("Removed all entries from catalog.");
                                         break;
                                     }
                                     bool success = int.TryParse(parts[2], out int v);
 
                                     if (success)
+                                    {
                                         CatalogUi.UnUnlockFish(v);
+                                        Console.WriteLine("Removed an entry from catalog.");
+                                    }
                                 }
                             }
                             break;
