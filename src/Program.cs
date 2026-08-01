@@ -598,6 +598,7 @@ sebastianjecny-green
                             {
                                 data.Inventory.Add(catchingFish ?? new Fish());
                             }
+                            Console.WriteLine();
                             CheckForNewAdvancements();
                             data.GameState = GameState.MainMenu;
                             currentlyCatching = false;

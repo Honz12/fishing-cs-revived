@@ -33,7 +33,7 @@ static class AdvancementProcessor
             };
         }
 
-        else if (Program.data.RodLevel = 1 && !unlockedAdvancementIds.Contains("poradnyPrut"))
+        else if (Program.data.RodLevel == 1 && !unlockedAdvancementIds.Contains("poradnyPrut"))
         {
             unlockedAdvancementIds.Add("poradnyPrut");
             return new Advancement()
@@ -45,7 +45,7 @@ static class AdvancementProcessor
             };
         }
         
-        else if (Program.data.HouseLevel = 1 && !unlockedAdvancementIds.Contains("domaNejlip"))
+        else if (Program.data.HouseLevel == 1 && !unlockedAdvancementIds.Contains("domaNejlip"))
         {
             unlockedAdvancementIds.Add("domaNejlip");
             return new Advancement()
@@ -57,16 +57,30 @@ static class AdvancementProcessor
             };
         }
         
-        else if (Program.data.HouseLevel = 5 && !unlockedAdvancementIds.Contains("chytKrakena")) //upravit pro case ze mam krakena
+        else if (!unlockedAdvancementIds.Contains("chytKrakena"))
         {
-            unlockedAdvancementIds.Add("chytKrakena");
-            return new Advancement()
+            bool hasKraken = false;
+
+            foreach (Fish fish in Program.data.Inventory)
             {
-                Name = "Co to je?!",
-                Description = "Chyť Krakena.",
-                IconName = "chytKrakena.txt",
-                Id = "chytKrakena"
-            };
+                if (fish.Rarity == FishRarity.Kraken)
+                {
+                    hasKraken = true;
+                    break;
+                }
+            }
+
+            if (hasKraken)
+            {
+                unlockedAdvancementIds.Add("chytKrakena");
+                return new Advancement()
+                {
+                    Name = "Co to je?!",
+                    Description = "Chyť Krakena.",
+                    IconName = "chytKrakena.txt",
+                    Id = "chytKrakena"
+                };
+            }
         }
         
         else if (Program.data.HouseLevel >= 4 && !unlockedAdvancementIds.Contains("tatuvTelefonat"))
@@ -80,10 +94,6 @@ static class AdvancementProcessor
                 Id = "tatuvTelefonat.txt"
             };
         }
-        
-        else
-        {
-            return null; 
-        } 
+        return null; 
     }
 }
