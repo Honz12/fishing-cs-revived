@@ -31,10 +31,12 @@ static class AdvancementUi
             Advancement advancement = Program.data.Advancements[i];
 
             if (Selected == i)
+                Console.WriteLine();
                 Program.DisplayImage(
                     new Image("advancements", advancement.IconName),
                     $"{advancement.Name} ({advancement.Description})"
                 );
+                Console.WriteLine();
             else
                 Console.WriteLine($"- {advancement.Name} ({advancement.Description})");
         }
