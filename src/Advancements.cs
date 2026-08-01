@@ -88,7 +88,19 @@ static class AdvancementProcessor
                 Name = "Tátův telefonát.",
                 Description = "Táta ti zavolal.",
                 IconName = "tatuvTelefonat.txt",
-                Id = "tatuvTelefonat.txt"
+                Id = "tatuvTelefonat"
+            };
+        }
+
+        else if (Program.data.HouseLevel >= 4 && Program.data.RodLevel == 10 && Program.data.InventorySize >= 4 && !unlockedAdvancementIds.Contains("max"))
+        {
+            unlockedAdvancementIds.Add("max");
+            return new Advancement()
+            {
+                Name = "Max!",
+                Description = "Koupil jsi všechny upgrady.",
+                IconName = "max.txt",
+                Id = "max"
             };
         }
 
