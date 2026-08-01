@@ -32,6 +32,11 @@ class MainMenu
             Console.WriteLine("  Chladící Box");
 
         if (selected == 3)
+            Console.WriteLine("> Otevřít Advancmenty");
+        else
+            Console.WriteLine("  Otevřít Advancmenty");
+
+        if (selected == 4)
             Console.WriteLine("> Opustit Hru");
         else
             Console.WriteLine("  Opustit Hru");
@@ -53,8 +58,8 @@ class MainMenu
     public static void UiButtonMenuUp()
     {
         selected--;
-        selected += 4;
-        selected %= 4;
+        selected += 5;
+        selected %= 5;
     }
 
     /// <summary>
@@ -70,7 +75,8 @@ class MainMenu
             case 0: playerData.GameState = GameState.Catching; Program.CatchingInit(); break;
             case 1: playerData.GameState = GameState.Shop; Shop.selected = 0; break;
             case 2: playerData.GameState = GameState.Inventory; InventoryUi.selected = 0; break;
-            case 3: Console.CursorVisible = true; Environment.Exit(0); break;
+            case 3: playerData.GameState = GameState.Advancements; break;
+            case 4: Console.CursorVisible = true; Environment.Exit(0); break;
         }
     }
 }

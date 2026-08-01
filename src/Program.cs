@@ -1,6 +1,6 @@
 ﻿public enum GameState
 {
-    BootScreen, MainMenu, Shop, Catching, Inventory
+    BootScreen, MainMenu, Shop, Catching, Inventory, Advancements
 }
 
 class PlayerData
@@ -42,7 +42,7 @@ class Program
     private static bool currentlyCatching = false;
     private static int catchingOffset = 0;
     private static int catchingVel = 0;
-    private static Image shopSeller;
+    private static Image shopSeller = new("characters", "civil0.txt");
     private static bool storySkipped = false;
 
     // Helper functions
@@ -174,6 +174,7 @@ class Program
             {
                 if (text[textPointer] == '\r')
                 {
+                    textPointer++;
                     continue;
                 }
                 if (text[textPointer] == '\n')
@@ -343,21 +344,19 @@ sebastianjecny-green
 ";
 
         DisplayImage(new Image("ui", "csLogo.txt"), credits);
-        Console.ReadKey(true);
         DisplayImage(
             new Image("ui", "iconHonz12.txt"),
             honz12Text
         );
-        Console.ReadKey(true);
         DisplayImage(
             new Image("ui", "iconMistrmatej.txt"),
             mistrmatejText
         );
-        Console.ReadKey(true);
         DisplayImage(
             new Image("ui", "iconSebastianjecny.txt"),
             sebastianjecnyText
         );
+        Console.ReadKey(true);
     }
 
     /// <summary>
@@ -373,9 +372,9 @@ sebastianjecny-green
         shopSeller = new Image("characters", (new string[]
         {
             "civil0.txt", "civil1.txt", "civil2.txt",
-            "kapitan.txt", "namornik.txt",
+            "kapitan.txt", "namornik.txt", "pepek.txt",
             "rybar0.txt", "rybar1.txt", "rybar2.txt", "rybar3.txt"
-        })[Rng.Next(0, 9)]);
+        })[Rng.Next(0, 10)]);
 
         Console.CursorVisible = false;
 
@@ -480,30 +479,34 @@ sebastianjecny-green
                             "Ryba je " + GetTransRarity((catchingFish ?? new Fish()).Rarity) // Display fish rarity.
                         );
                         Console.WriteLine();
-
-                        string line = "";
-                        byte color = 0;
-
-                        for (int i = 0; i < CATCHING_UI_WIDTH; i++)
+                        for (int j = 0; j < 2; j++)
                         {
-                            byte desiredColor;
+                            string line = "";
+                            byte color = 0;
 
-                            if (leftWidth <= i && i < leftWidth + catchingCenterSize)
-                                desiredColor = 102;
-                            else
-                                desiredColor = 101;
-                            if (i == catchingPos)
-                                desiredColor = 0;
-
-                            if (desiredColor != color)
+                            for (int i = 0; i < CATCHING_UI_WIDTH; i++)
                             {
-                                line += $"\x1b[{desiredColor}m";
-                                color = desiredColor;
+                                byte desiredColor;
+
+                                if (leftWidth <= i && i < leftWidth + catchingCenterSize)
+                                    desiredColor = 102;
+                                else
+                                    desiredColor = 101;
+                                if (i == catchingPos)
+                                    desiredColor = 0;
+
+                                if (desiredColor != color)
+                                {
+                                    line += $"\x1b[{desiredColor}m";
+                                    color = desiredColor;
+                                }
+                                line += ' ';
                             }
-                            line += ' ';
+
+                            Console.WriteLine(line + "\x1b[0m"); // Write the catching bar.
                         }
 
-                        Console.WriteLine(line + "\x1b[0m"); // Write the catching bar.
+                        Console.WriteLine();
 
                         int progress = (int)(((double)successfullyCatchingTicks) / ((double)requiredCatchingTicks) * CATCHING_UI_WIDTH); // Calculate progress
 
@@ -614,6 +617,12 @@ sebastianjecny-green
                                 data.GameState = GameState.MainMenu;
                                 break;
                         }
+                    }
+                    break;
+                case GameState.Advancements:
+                    {
+                        Console.Clear();
+
                     }
                     break;
             }
