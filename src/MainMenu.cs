@@ -32,9 +32,9 @@ class MainMenu
             Console.WriteLine("  Chladící Box");
 
         if (selected == 3)
-            Console.WriteLine("> Otevřít Advancmenty");
+            Console.WriteLine("> Otevřít Odznaky");
         else
-            Console.WriteLine("  Otevřít Advancmenty");
+            Console.WriteLine("  Otevřít Odznaky");
 
         if (selected == 4)
             Console.WriteLine("> Opustit Hru");

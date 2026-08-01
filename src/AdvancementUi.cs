@@ -24,7 +24,7 @@ static class AdvancementUi
 
     public static void Display()
     {
-        Console.WriteLine($"Advancementy: {Program.data.Advancements.Count}/{AdvancementProcessor.AdvancementCount}\n");
+        Console.WriteLine($"Odznaky: {Program.data.Advancements.Count}/{AdvancementProcessor.AdvancementCount}\n");
 
         for (int i = 0; i < Program.data.Advancements.Count; i++)
         {

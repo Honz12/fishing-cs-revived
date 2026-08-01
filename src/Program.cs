@@ -316,35 +316,46 @@ class Program
     public static void DisplayCredits()
     {
         Console.Clear();
+
         string credits = @" === Kde Jsou Ryby ===
-Vytvořeno v C# pro .NET 10
+Vytvořeno v C# pro .NET 10, projekt licencován pod MIT licencí.
 
 Vývojáři:
 - Honz12               : Engine kód
 - mistrmatej           : Game design
 - sebastianjecny-green : Grafika
-        (pouze součástí původního projektu)
 ";
-        string mistrmatejText = @" === Vývojáři ===
-mistrmatej
+
+        string vyvojariText = @"
+ __   __ __          _   __ _ _   
+ \ \ / //_/__ _____ (_)_/_/ \ˇ/(_)
+  \ V / || \ V / _ \| / _` | '_| |
+   \_/ \_, |\_/\___// \__,_|_| |_|
+       |__/       |__/            
+";
+
+        string mistrmatejText = @$"
+{TITLE_COLOR}mistrmatej
 - Udělal Obchod.
 - Balancoval hru.
-- Vytvořil všechny data ryb.
+- Vytvořil všechny data ryb a odznaků.
 ";
-        string honz12Text = @" === Vývojáři ===
-Honz12
+        string honz12Text = @$"
+{TITLE_COLOR}Honz12
 - Udělal engine hry.
 - Přispěl pár obrázky pro grafiku.
 - Obnovil projekt fishing-cs-hackathon.
 ";
-        string sebastianjecnyText = @" === Vývojáři ===
-sebastianjecny-green
+        string sebastianjecnyText = @$"
+{TITLE_COLOR}sebastianjecny-green
 - Udělal všechnu grafiku původní hry.
 - Vytvořil nápady pro několik systémů.
-- Pracoval jen na původním projektu.
 ";
 
         DisplayImage(new Image("ui", "csLogo.txt"), credits);
+
+        Console.WriteLine(TITLE_COLOR + vyvojariText + "\x1b[0m");
+
         DisplayImage(
             new Image("ui", "iconHonz12.txt"),
             honz12Text
@@ -357,6 +368,10 @@ sebastianjecny-green
             new Image("ui", "iconSebastianjecny.txt"),
             sebastianjecnyText
         );
+
+        Console.WriteLine($"{TITLE_COLOR}https://github.com/Honz12/fishing-cs-revived\x1b[0m - Zdrojový kód hry");
+        Console.WriteLine("Jakákoliv klávesa pro pokračování ...");
+
         Console.ReadKey(true);
     }
 
@@ -366,7 +381,9 @@ sebastianjecny-green
         while (newAdvancement != null)
         {
             data.Advancements.Add(newAdvancement);
-            Console.WriteLine($"Nový Advancment odemčen: {newAdvancement.Name} ({newAdvancement.Description})");
+            Console.WriteLine();
+            Console.WriteLine($"{TITLE_COLOR}Nový Odznak odemčen: {newAdvancement.Name} ({newAdvancement.Description})\x1b[0m");
+            Console.WriteLine($"Stikněte libovolnou klávesu ...");
             Console.ReadKey(true);
             newAdvancement = AdvancementProcessor.CheckForNewAdvancements(data);
         }
