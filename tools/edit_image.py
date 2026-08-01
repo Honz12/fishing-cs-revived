@@ -7,10 +7,23 @@ The file format is identical to the Tkinter version (generate_image.py):
 
 import argparse
 import os
-from collections import deque
-import select
+import shutil
 import sys
-import termios
+import time
+from collections import deque
+
+if os.name == "nt":
+    import ctypes
+    import msvcrt
+    from ctypes import wintypes
+else:
+    import select
+    import termios
+
+STD_OUTPUT_HANDLE = -11
+STD_INPUT_HANDLE = -10
+ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
+ENABLE_VIRTUAL_TERMINAL_INPUT = 0x0200
 
 PALETTE = {
     "0": (0x00, 0x00, 0x00),  # Black
@@ -32,10 +45,22 @@ PALETTE = {
 }
 
 COLOR_NAMES = {
-    "0": "Black", "1": "Red", "2": "Green", "3": "Yellow",
-    "4": "Blue", "5": "Purple", "6": "Cyan", "7": "Dim White",
-    "8": "Gray", "9": "Light Red", "A": "Light Green", "B": "Light Yellow",
-    "C": "Light Blue", "D": "Light Purple", "E": "Light Cyan", "F": "White",
+    "0": "Black",
+    "1": "Red",
+    "2": "Green",
+    "3": "Yellow",
+    "4": "Blue",
+    "5": "Purple",
+    "6": "Cyan",
+    "7": "Dim White",
+    "8": "Gray",
+    "9": "Light Red",
+    "A": "Light Green",
+    "B": "Light Yellow",
+    "C": "Light Blue",
+    "D": "Light Purple",
+    "E": "Light Cyan",
+    "F": "White",
 }
 
 # Colors dark enough to need light text on them (mirrors the Tkinter editor).
@@ -45,7 +70,7 @@ GRID_WIDTH = GRID_SIZE * 2
 CELL = "  "
 BORDER_TL, BORDER_TR = "\u250c", "\u2510"  # ┌ ┐
 BORDER_BL, BORDER_BR = "\u2514", "\u2518"  # └ ┘
-BORDER_H, BORDER_V = "\u2500", "\u2502"    # ─ │
+BORDER_H, BORDER_V = "\u2500", "\u2502"  # ─ │
 
 
 def get_rgb_color(hex_char):
@@ -78,8 +103,10 @@ def parse_image(contents):
 
 class Editor:
     def __init__(self, filename=None):
-        self.fd = sys.stdin.fileno()
+        self.fd = None if os.name == "nt" else sys.stdin.fileno()
         self.old_termios = None
+        self.console_handles = None
+        self.old_console_mode = None
         self.grid = [["0" for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
         self.cx = 0
         self.cy = 0
@@ -187,23 +214,26 @@ class Editor:
             "[Arrows] move  [Space/L-click] draw  [R-click] erase  "
             "[B] fill  [E] erase  [Tab] color"
         )
-        buf.append(
-            "[Z] undo  [R] redo  [S] save  [Ctrl+A] save as  "
-            "[O] open  [Q] quit"
-        )
+        buf.append("[Z] undo  [R] redo  [S] save  [Ctrl+A] save as  [O] open  [Q] quit")
         sys.stdout.write("\r\n".join(buf) + "\n")
         sys.stdout.flush()
 
     def set_raw(self):
         self.old_termios = termios.tcgetattr(self.fd)
         mode = termios.tcgetattr(self.fd)
-        mode[0] = mode[0] & ~(termios.BRKINT | termios.ICRNL | termios.INPCK
-                              | termios.ISTRIP | termios.IXON)
+        mode[0] = mode[0] & ~(
+            termios.BRKINT
+            | termios.ICRNL
+            | termios.INPCK
+            | termios.ISTRIP
+            | termios.IXON
+        )
         mode[1] = mode[1] & ~termios.OPOST
         mode[2] = mode[2] & ~(termios.CSIZE | termios.PARENB)
         mode[2] = mode[2] | termios.CS8
-        mode[3] = mode[3] & ~(termios.ECHO | termios.ICANON | termios.IEXTEN
-                              | termios.ISIG)
+        mode[3] = mode[3] & ~(
+            termios.ECHO | termios.ICANON | termios.IEXTEN | termios.ISIG
+        )
         mode[6][termios.VMIN] = 1
         mode[6][termios.VTIME] = 0
         termios.tcsetattr(self.fd, termios.TCSANOW, mode)
@@ -255,14 +285,18 @@ class Editor:
             if seq.startswith(b"[<"):
                 return self.parse_mouse(seq)
             return {
-                b"[A": "up", b"[B": "down",
-                b"[C": "right", b"[D": "left",
+                b"[A": "up",
+                b"[B": "down",
+                b"[C": "right",
+                b"[D": "left",
             }.get(seq)
         if b1 == b"O":
             seq = b1 + (self.read_byte() or b"")
             return {
-                b"OA": "up", b"OB": "down",
-                b"OC": "right", b"OD": "left",
+                b"OA": "up",
+                b"OB": "down",
+                b"OC": "right",
+                b"OD": "left",
             }.get(seq)
         return "alt_" + b1.decode("latin-1", errors="replace")
 
@@ -377,7 +411,7 @@ class Editor:
                 return line
             elif key in ("\x7f", "\x08"):
                 if cursor > 0:
-                    line = line[:cursor - 1] + line[cursor:]
+                    line = line[: cursor - 1] + line[cursor:]
                     cursor -= 1
                     self._redraw_line(message, line, cursor)
             elif key in ("\x1b", "\x03", "\x04"):
