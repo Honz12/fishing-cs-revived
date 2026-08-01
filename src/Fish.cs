@@ -55,7 +55,7 @@ namespace fishing_cs_revived.src
         /// <returns>The formated string.</returns>
         public string GetInfoCompact()
         {
-            return $"{Name, 20} | Váha: {Weight, 6} Kg | {Program.GetTransRarity(Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(Rarity).Length)} | Cena: {(uint) (PricePerKg * Weight)}";
+            return $"{Name, -20} | Váha: {Weight, -6} Kg | {Program.GetTransRarity(Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(Rarity).Length)} | Cena: {(uint) (PricePerKg * Weight)}";
         }
     }
 }

@@ -8,15 +8,34 @@ namespace fishing_cs_revived.src.Ui
 
         public static void ShowCatalog()
         {
+            string title = Program.TITLE_COLOR + @"  _  __     _        _             ___      _    
+ | |/ /__ _| |_ __ _| |___  __ _  | _ \_  _| |__ 
+ | ' </ _` |  _/ _` | / _ \/ _` | |   / || | '_ \
+ |_|\_\__,_|\__\__,_|_\___/\__, | |_|_\\_, |_.__/
+                           |___/       |__/      " + "\n\x1b[0m";
+            
+            Console.WriteLine(title);
+
+            string line = "";
+            string unknown = "???";
+
             for (int i = 0; i < FishData.fishes.Length; i++)
             {
                 TFish tFish = FishData.fishes[i];
 
                 if (unlockedFishIds.Contains(i))
-                    Console.WriteLine($"Name: {tFish.Name,-20}, Rarity: {tFish.Rarity}");
+                    line += $"Name: {tFish.Name,-20} Rarity: {Program.GetTransRarity(tFish.Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(tFish.Rarity).Length)} | ";
                 else
-                    Console.WriteLine($"Name: ???, Rarity: ???");
+                    line += $"\x1b[0;90mName: {unknown,-20} Rarity: {unknown,-12}\x1b[0m | ";
+                
+                if (i % 2 == 1)
+                {
+                    Console.WriteLine("| " + line);
+                    line = "";
+                }
             }
+            if (line.Length != 0)
+                Console.WriteLine("| " + line);
         }
 
         public static void UnlockFish(int fishId)

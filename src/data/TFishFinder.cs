@@ -6,8 +6,8 @@ namespace fishing_cs_revived.src.Data
         /// Find a random available fish.
         /// </summary>
         /// <param name="rodLevel">Player's Fishing Rod level.</param>
-        /// <returns>The fish template.</returns>
-        public static TFish FindRandomFish(int rodLevel)
+        /// <returns>The fish Id</returns>
+        public static int FindRandomFish(int rodLevel)
         {
             List<int> possible = new List<int>();
 
@@ -19,7 +19,7 @@ namespace fishing_cs_revived.src.Data
                     possible.Add(i);
             }
 
-            return FishData.fishes[possible[Program.Rng.Next(0, possible.Count)]];
+            return possible[Program.Rng.Next(0, possible.Count)];
         }
     }
 }

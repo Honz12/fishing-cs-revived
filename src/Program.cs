@@ -5,7 +5,7 @@ namespace fishing_cs_revived.src
 {
     public enum GameState
     {
-        BootScreen, MainMenu, Shop, Catching, Inventory, Advancements
+        BootScreen, MainMenu, Shop, Catching, Inventory, Advancements, Catalog
     }
 
     public class PlayerData
@@ -43,8 +43,8 @@ namespace fishing_cs_revived.src
         private static int successfullyCatchingTicks = 0;
         private static int catchingCenterSize = 0;
         private static Fish? catchingFish = null;
+        private static int catchingFishId = 0;
         private static uint requiredCatchingTicks = 0;
-        private static bool catchingFlipped = false;
         private static bool currentlyCatching = false;
         private static int catchingOffset = 0;
         private static int catchingVel = 0;
@@ -617,6 +617,7 @@ namespace fishing_cs_revived.src
                             }
                             else if (successfullyCatchingTicks >= requiredCatchingTicks) // If player successfully reached the goal, we give the win condition
                             {
+                                CatalogUi.UnlockFish(catchingFishId);
                                 Console.WriteLine("Chytil jsi:");
                                 DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
                                 Console.Write("Ponechat? (A/n)");
@@ -687,6 +688,15 @@ namespace fishing_cs_revived.src
                             }
                         }
                         break;
+                    case GameState.Catalog:
+                        {
+                            Console.Clear();
+                            CatalogUi.ShowCatalog();
+                            Console.WriteLine("\nJakákoliv klávesa pro návrat ...");
+                            Console.ReadKey(true);
+                            data.GameState = GameState.MainMenu;
+                        }
+                        break;
                 }
             }
         }
@@ -701,10 +711,10 @@ namespace fishing_cs_revived.src
             successfullyCatchingTicks = 0;
             catchingCenterSize = Rng.Next(10, 20);
             requiredCatchingTicks = (uint)Rng.Next(20, 50);
-            catchingFish = new Fish(TFishFinder.FindRandomFish(data.RodLevel));
-            catchingFlipped = false;
+            catchingFishId = TFishFinder.FindRandomFish(data.RodLevel);
+            catchingFish = new Fish(FishData.fishes[catchingFishId]);
             catchingOffset = 0;
-            if ((int)catchingFish.Rarity >= (int)FishRarity.Rare)
+            if ((int) catchingFish.Rarity >= (int) FishRarity.Rare)
             {
                 catchingVel = Rng.Next(0, 2) * 2 - 1;
             }

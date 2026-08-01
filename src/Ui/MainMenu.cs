@@ -39,6 +39,11 @@ namespace fishing_cs_revived.src.Ui
                 Console.WriteLine("  Otevřít Odznaky");
 
             if (selected == 4)
+                Console.WriteLine("> Otevřít Katalog");
+            else
+                Console.WriteLine("  Otevřít Katalog");
+
+            if (selected == 5)
                 Console.WriteLine("> Opustit Hru");
             else
                 Console.WriteLine("  Opustit Hru");
@@ -50,8 +55,8 @@ namespace fishing_cs_revived.src.Ui
         public static void UiButtonMenuDown()
         {
             selected++;
-            selected += 5;
-            selected %= 5;
+            selected += 6;
+            selected %= 6;
         }
 
         /// <summary>
@@ -60,8 +65,8 @@ namespace fishing_cs_revived.src.Ui
         public static void UiButtonMenuUp()
         {
             selected--;
-            selected += 5;
-            selected %= 5;
+            selected += 6;
+            selected %= 6;
         }
 
         /// <summary>
@@ -78,7 +83,8 @@ namespace fishing_cs_revived.src.Ui
                 case 1: playerData.GameState = GameState.Shop; Shop.selected = 0; break;
                 case 2: playerData.GameState = GameState.Inventory; InventoryUi.Selected = 0; break;
                 case 3: playerData.GameState = GameState.Advancements; AdvancementUi.Selected = 0; break;
-                case 4: Console.CursorVisible = true; Environment.Exit(0); break;
+                case 4: playerData.GameState = GameState.Catalog; break;
+                case 5: Console.CursorVisible = true; Environment.Exit(0); break;
             }
         }
     }
