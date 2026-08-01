@@ -11,7 +11,7 @@ Commands:
     help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
     money <amount>                  Sets the money of the player.
     upgrade rod <level>             Sets the upgrade level of the fishing rod.
-    upgrade ship <level>            Sets the upgrade level of the ship.
+    upgrade ship <level>            Sets the upgrade level of the shi°+p.
     upgrade house <level>           Sets the upgrade level of the house.
     fish list                       Lists all available fish.
     fish add <fish_id>              Adds a fish to the player's inventory.
