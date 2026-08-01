@@ -8,7 +8,7 @@ namespace fishing_cs_revived.src.Ui
 
         private static void DisplayTableRarity(FishRarity rarity)
         {
-            Console.WriteLine("===== " + Program.GetTransRarity(rarity) + " =====");
+            Console.WriteLine(Program.TITLE_COLOR + "===== " + Program.GetTransRarity(rarity) + Program.TITLE_COLOR + " =====\x1b[0m");
 
             string line = "";
             string unknown = "???";
@@ -39,7 +39,7 @@ namespace fishing_cs_revived.src.Ui
 
         private static void DisplayTableRarityOther()
         {
-            Console.WriteLine("===== Jiné =====");
+            Console.WriteLine(Program.TITLE_COLOR + "===== Jiné =====\x1b[0m");
 
             string line = "";
             string unknown = "???";

@@ -11,7 +11,7 @@ namespace fishing_cs_revived.src.Ui
         private static string helpString = @"Kde Jsou Ryby!? Debug Command Interface
 
     Commands:
-        quit or exit                           Exits the Kde Jsou Ryby!? Debug Command Interface.
+        quit or exit                    Exits the Kde Jsou Ryby!? Debug Command Interface.
         help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
         money <amount>                  Sets the money of the player.
         upgrade rod <level>             Sets the upgrade level of the fishing rod.
