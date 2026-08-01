@@ -299,7 +299,7 @@ public class Program
         Console.Clear();
         Console.WriteLine("Příběh, jakákoliv klávesa pro pokračování:\n");
 
-        Sound.PlayAudioFile("freesound_community-phone-call-14472.wav");
+        Sound.PlayAudioFile("startCall.wav");
 
         SayStory("Najednou ti zavolá táta.");
 
@@ -309,7 +309,7 @@ public class Program
         
         SayStory("V tu chvíli si vzpomeneš, jak to celé začalo...");
 
-        Sound.PlayAudioFile("u_z31mph1yzr-end-call-120633.wav");
+        Sound.PlayAudioFile("endCall.wav");
 
         SayBoy("Položíš telefon bez odpovědi, usměješ se a řekneš si:");
 
