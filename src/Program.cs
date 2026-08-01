@@ -454,6 +454,7 @@ sebastianjecny-green
                             case ConsoleKey.Spacebar:
                             case ConsoleKey.Enter:
                                 Shop.EnterOption(data);
+                                Console.WriteLine(data.HouseLevel);
                                 CheckForNewAdvancements();
                                 break;
                             case ConsoleKey.Escape:

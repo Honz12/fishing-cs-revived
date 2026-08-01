@@ -21,6 +21,17 @@ static class AdvancementProcessor
     public static int AdvancementCount = 0;
     public static Advancement? CheckForNewAdvancements(PlayerData playerData)
     {
+        bool hasKraken = false;
+
+        foreach (Fish fish in Program.data.Inventory)
+        {
+            if (fish.Rarity == FishRarity.Kraken)
+            {
+                hasKraken = true;
+                break;
+            }
+        }
+
         if (playerData.Inventory.Count > 0 && !unlockedAdvancementIds.Contains("prvniUlovek"))
         {
             unlockedAdvancementIds.Add("prvniUlovek");
@@ -57,30 +68,16 @@ static class AdvancementProcessor
             };
         }
         
-        else if (!unlockedAdvancementIds.Contains("chytKrakena"))
+        else if (hasKraken && !unlockedAdvancementIds.Contains("chytKrakena"))
         {
-            bool hasKraken = false;
-
-            foreach (Fish fish in Program.data.Inventory)
+            unlockedAdvancementIds.Add("chytKrakena");
+            return new Advancement()
             {
-                if (fish.Rarity == FishRarity.Kraken)
-                {
-                    hasKraken = true;
-                    break;
-                }
-            }
-
-            if (hasKraken)
-            {
-                unlockedAdvancementIds.Add("chytKrakena");
-                return new Advancement()
-                {
-                    Name = "Co to je?!",
-                    Description = "Chyť Krakena.",
-                    IconName = "chytKrakena.txt",
-                    Id = "chytKrakena"
-                };
-            }
+                Name = "Co to je?!",
+                Description = "Chyť Krakena.",
+                IconName = "chytKrakena.txt",
+                Id = "chytKrakena"
+            };
         }
         
         else if (Program.data.HouseLevel >= 4 && !unlockedAdvancementIds.Contains("tatuvTelefonat"))
