@@ -375,7 +375,7 @@ Vývojáři:
         Console.ReadKey(true);
     }
 
-    private static void CheckForNewAdvancements()
+    public static void CheckForNewAdvancements()
     {
         Advancement? newAdvancement = AdvancementProcessor.CheckForNewAdvancements(data);
         while (newAdvancement != null)
