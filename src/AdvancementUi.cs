@@ -24,7 +24,17 @@ public static class AdvancementUi
 
     public static void Display()
     {
-        Console.WriteLine($"Odznaky: {Program.data.Advancements.Count}/{AdvancementProcessor.AdvancementCount}\n");
+        string title = (Program.TITLE_COLOR +
+            @"   ___     _              _        
+  / _ \ __| |____ _  __ _| |___  _ 
+ | (_) / _` |_ / ' \/ _` | / / || |
+  \___/\__,_/__|_||_\__,_|_\_\\_, |
+                              |__/ " + "\x1b[0m"
+        );
+
+        Console.WriteLine(title);
+
+        Console.WriteLine($"{Program.data.Advancements.Count}/{AdvancementProcessor.AdvancementCount}\n");
 
         for (int i = 0; i < Program.data.Advancements.Count; i++)
         {

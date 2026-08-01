@@ -299,6 +299,8 @@ public class Program
         Console.Clear();
         Console.WriteLine("Příběh, jakákoliv klávesa pro pokračování:\n");
 
+        Sound.PlayAudioFile("freesound_community-phone-call-14472.wav");
+
         SayStory("Najednou ti zavolá táta.");
 
         SayDad("Ahoj, vím že jsme spolu dlouho nemluvili, ale slyšel jsem, že jsi rozjel vlastní podnik a koupil sis vilu.");
@@ -306,6 +308,8 @@ public class Program
         SayDad("Je to pravda?");
         
         SayStory("V tu chvíli si vzpomeneš, jak to celé začalo...");
+
+        Sound.PlayAudioFile("u_z31mph1yzr-end-call-120633.wav");
 
         SayBoy("Položíš telefon bez odpovědi, usměješ se a řekneš si:");
 

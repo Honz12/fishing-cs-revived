@@ -18,7 +18,7 @@ public static class Sound
             }
         );
 
-        process?.WaitForExit();
+        //process?.WaitForExit();
     }
 
     public static void PlayAudioFile(string name)

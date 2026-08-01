@@ -114,6 +114,7 @@ public class Shop
                     {
                         playerData.Money -= rodCost;
                         playerData.RodLevel++;
+                        Sound.PlayAudioFile("buy.wav");
                     }
                 }
                 break;
@@ -126,6 +127,7 @@ public class Shop
                     {
                         playerData.Money -= invCost;
                         playerData.InventorySize++;
+                        Sound.PlayAudioFile("buy.wav");
                     }
                 }
                 break;
@@ -138,6 +140,7 @@ public class Shop
                     {
                         playerData.Money -= houseCost;
                         playerData.HouseLevel++;
+                        Sound.PlayAudioFile("buy.wav");
 
                         if (playerData.HouseLevel == 4)
                         {
