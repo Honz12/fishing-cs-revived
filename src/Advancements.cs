@@ -18,7 +18,7 @@ static class AdvancementProcessor
     /// </summary>
     /// <param name="playerData"></param>
     /// <returns></returns>
-    public static int AdvancementCount = 0;
+    public static int AdvancementCount = 5;
     public static Advancement? CheckForNewAdvancements(PlayerData playerData)
     {
         if (playerData.Inventory.Count > 0 && !unlockedAdvancementIds.Contains("prvniUlovek"))
@@ -94,6 +94,7 @@ static class AdvancementProcessor
                 Id = "tatuvTelefonat.txt"
             };
         }
+
         return null; 
     }
 }
