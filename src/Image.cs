@@ -1,4 +1,4 @@
-class Image
+public class Image
 {
     static byte ConvertColorHexToByte(char c) => char.ToLower(c) switch
     {

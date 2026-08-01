@@ -1,4 +1,4 @@
-enum FishRarity
+public enum FishRarity
 {
     Common,
     Rare,
@@ -7,7 +7,7 @@ enum FishRarity
     Kraken,
 }
 
-class TFish // The "TemplateFish".
+public class TFish // The "TemplateFish".
 {
     public required string Name;
     public required double Weight;

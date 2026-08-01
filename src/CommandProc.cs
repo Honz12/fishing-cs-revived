@@ -1,4 +1,4 @@
-class CommandProc
+public class CommandProc
 {
     private static PlayerData data;
 
@@ -16,6 +16,7 @@ Commands:
     fish list                       Lists all available fish.
     fish add <fish_id>              Adds a fish to the player's inventory.
     advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
+    sound                           Toggles sound on or off.
 ";
 
     public static void Enter(PlayerData playerData)
@@ -84,6 +85,11 @@ Commands:
                         break;
                     case "advrefresh":
                         Program.CheckForNewAdvancements();
+                        Console.WriteLine("Advancements refreshed.");
+                        break;
+                    case "sound":
+                        Program.audioEnabled = !Program.audioEnabled;
+                        Console.WriteLine($"Sound is now {(Program.audioEnabled ? "enabled" : "disabled")}.");
                         break;
                 }
                 break;
@@ -96,6 +102,7 @@ Commands:
 
                             if (success)
                                 data.Money = (uint) v;
+                                Console.WriteLine($"Money set to {data.Money}.");
                         }
                         break;
                     case "fish":
@@ -123,18 +130,21 @@ Commands:
                             {
                                 if (success)
                                     data.RodLevel = (ushort) v;
+                                    Console.WriteLine($"Rod level set to {data.RodLevel}.");
                             }
 
                             else if (parts[1] == "ship")
                             {
                                 if (success)
                                     data.InventorySize = (byte) v;
+                                    Console.WriteLine($"Ship level set to {data.InventorySize}.");
                             }
                             
                             else if (parts[1] == "house")
                             {
                                 if (success)
                                     data.HouseLevel = (byte) v;
+                                    Console.WriteLine($"House level set to {data.HouseLevel}.");
                             }
                         }
                         break;
@@ -145,7 +155,12 @@ Commands:
 
                             if (success)
                                 if (v >= 0 && v < FishData.fishes.Length)
-                                    Program.data.Inventory.Add(new Fish(FishData.fishes[v]));
+                                {
+                                    Fish fish = new(FishData.fishes[v]);
+                                    Program.data.Inventory.Add(fish);
+                                    Console.WriteLine("Added fish to inventory.");
+                                    Program.DisplayImage(fish.Image, fish.GetFormatedData());
+                                }
                         }
                         break;
                 }

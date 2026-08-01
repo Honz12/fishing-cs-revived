@@ -82,5 +82,6 @@ Program.TITLE_COLOR + @"  \___|_||_|_\__,_\__,_|_\__|_| |___/\___/_\_\" + "\x1b[
 
         playerData.Inventory.RemoveAt(Selected);
         Selected = Math.Max(0, Selected - 1);
+        Sound.PlayAudioFile("sell.wav");
     }
 }

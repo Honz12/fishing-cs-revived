@@ -1,4 +1,4 @@
-class Advancement
+public class Advancement
 {
     public required string Name;
     public required string Description;
@@ -8,7 +8,7 @@ class Advancement
 
 
 
-static class AdvancementProcessor
+public static class AdvancementProcessor
 {
     static List<string> unlockedAdvancementIds = new();
 

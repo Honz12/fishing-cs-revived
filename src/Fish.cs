@@ -1,4 +1,4 @@
-class Fish
+public class Fish
 {
     public string Name;
     public double Weight;

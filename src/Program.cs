@@ -3,7 +3,7 @@
     BootScreen, MainMenu, Shop, Catching, Inventory, Advancements
 }
 
-class PlayerData
+public class PlayerData
 {
     public uint Money = 0;
     public ushort RodLevel = 0;
@@ -16,7 +16,7 @@ class PlayerData
     public List<Advancement> Advancements = [];
 }
 
-class Program
+public class Program
 {
     // Constants
 
@@ -45,6 +45,8 @@ class Program
     private static int catchingVel = 0;
     private static Image shopSeller = new("characters", "civil0.txt");
     private static bool storySkipped = false;
+
+    public static bool audioEnabled = true;
 
     // Helper functions
 
@@ -372,6 +374,8 @@ Vývojáři:
         Console.WriteLine($"{TITLE_COLOR}https://github.com/Honz12/fishing-cs-revived\x1b[0m - Zdrojový kód hry");
         Console.WriteLine("Jakákoliv klávesa pro pokračování ...");
 
+        Sound.PlayAudioFile("soundTest.wav");
+
         Console.ReadKey(true);
     }
 
@@ -598,15 +602,16 @@ Vývojáři:
                             DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
                             currentlyCatching = false;
                             Console.WriteLine("Jakákoliv klávesa pro pokračování ...");
+                            Sound.PlayAudioFile("catchFailed.wav");
                             Console.ReadKey();
                             data.GameState = GameState.MainMenu;
                         }
                         else if (successfullyCatchingTicks >= requiredCatchingTicks) // If player successfully reached the goal, we give the win condition
                         {
-                            Console.Clear();
                             Console.WriteLine("Chytil jsi:");
                             DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
                             Console.Write("Ponechat? (A/n)");
+                            Sound.PlayAudioFile("catchSuccessfull.wav");
                             ConsoleKey consoleKey = Console.ReadKey(true).Key;
                             while (!(consoleKey == ConsoleKey.A || consoleKey == ConsoleKey.N || consoleKey == ConsoleKey.Y))
                             {

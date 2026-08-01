@@ -17,7 +17,7 @@
     }
 */
 
-class FishData
+public class FishData
 {
     public static TFish[] fishes = {
         // SLADKOVODNÍ RYBY

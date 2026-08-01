@@ -1,6 +1,6 @@
 using System;
 
-class Shop
+public class Shop
 {
     public static int selected = 0;
     private const int TOTAL_OPTIONS = 4;

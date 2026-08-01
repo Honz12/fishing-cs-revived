@@ -1,4 +1,4 @@
-static class TFishFinder
+public static class TFishFinder
 {
     /// <summary>
     /// Find a random available fish.
