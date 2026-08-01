@@ -13,6 +13,7 @@ class PlayerData
     public List<Fish> Inventory = new();
 
     public GameState GameState = GameState.BootScreen;
+    public List<Advancement> Advancements = [];
 }
 
 class Program
@@ -34,7 +35,7 @@ class Program
     public static PlayerData data = new();
     private static int catchingPos = 0;
     private static uint gameTicks = 0;
-    private static uint successfullyCatchingTicks = 0;
+    private static int successfullyCatchingTicks = 0;
     private static int catchingCenterSize = 0;
     private static Fish? catchingFish = null;
     private static uint requiredCatchingTicks = 0;
@@ -359,6 +360,18 @@ sebastianjecny-green
         Console.ReadKey(true);
     }
 
+    private static void CheckForNewAdvancements()
+    {
+        Advancement? newAdvancement = AdvancementProcessor.CheckForNewAdvancements(data);
+        while (newAdvancement != null)
+        {
+            data.Advancements.Add(newAdvancement);
+            Console.WriteLine($"Nový Advancment odemčen: {newAdvancement.Name} ({newAdvancement.Description})");
+            Console.ReadKey(true);
+            newAdvancement = AdvancementProcessor.CheckForNewAdvancements(data);
+        }
+    }
+
     /// <summary>
     /// The main function,
     /// what would you expect?
@@ -441,6 +454,7 @@ sebastianjecny-green
                             case ConsoleKey.Spacebar:
                             case ConsoleKey.Enter:
                                 Shop.EnterOption(data);
+                                CheckForNewAdvancements();
                                 break;
                             case ConsoleKey.Escape:
                                 data.GameState = GameState.MainMenu;
@@ -560,7 +574,7 @@ sebastianjecny-green
                         if (catchingOffset > 20)
                             catchingVel = -1;
 
-                        if (successfullyCatchingTicks > 0xFFFF) // We can surely say the position overflowed.
+                        if (successfullyCatchingTicks < 0)
                         {
                             Console.WriteLine("Ryba uplavala!");
                             DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
@@ -584,6 +598,7 @@ sebastianjecny-green
                             {
                                 data.Inventory.Add(catchingFish ?? new Fish());
                             }
+                            CheckForNewAdvancements();
                             data.GameState = GameState.MainMenu;
                             currentlyCatching = false;
                         }
@@ -612,6 +627,7 @@ sebastianjecny-green
                                 break;
                             case ConsoleKey.S:
                                 InventoryUi.SellOption(data);
+                                CheckForNewAdvancements();
                                 break;
                             case ConsoleKey.Escape:
                                 data.GameState = GameState.MainMenu;
@@ -623,6 +639,19 @@ sebastianjecny-green
                     {
                         Console.Clear();
 
+                        AdvancementUi.Display();
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case ConsoleKey.UpArrow:
+                                AdvancementUi.UiButtonMenuUp();
+                                break;
+                            case ConsoleKey.DownArrow:
+                                AdvancementUi.UiButtonMenuDown();
+                                break;
+                            case ConsoleKey.Escape:
+                                data.GameState = GameState.MainMenu;
+                                break;
+                        }
                     }
                     break;
             }

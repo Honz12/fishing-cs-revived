@@ -48,8 +48,8 @@ class MainMenu
     public static void UiButtonMenuDown()
     {
         selected++;
-        selected += 4;
-        selected %= 4;
+        selected += 5;
+        selected %= 5;
     }
 
     /// <summary>
@@ -74,8 +74,8 @@ class MainMenu
         {
             case 0: playerData.GameState = GameState.Catching; Program.CatchingInit(); break;
             case 1: playerData.GameState = GameState.Shop; Shop.selected = 0; break;
-            case 2: playerData.GameState = GameState.Inventory; InventoryUi.selected = 0; break;
-            case 3: playerData.GameState = GameState.Advancements; break;
+            case 2: playerData.GameState = GameState.Inventory; InventoryUi.Selected = 0; break;
+            case 3: playerData.GameState = GameState.Advancements; AdvancementUi.Selected = 0; break;
             case 4: Console.CursorVisible = true; Environment.Exit(0); break;
         }
     }
