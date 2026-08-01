@@ -26,12 +26,13 @@ namespace fishing_cs_revived.src.Ui
 
         public static void Display()
         {
-            string title = (Program.TITLE_COLOR +
-                @"   ___     _              _        
-    / _ \ __| |____ _  __ _| |___  _ 
-    | (_) / _` |_ / ' \/ _` | / / || |
-    \___/\__,_/__|_||_\__,_|_\_\\_, |
-                                |__/ " + "\x1b[0m"
+            string title = (
+                Program.TITLE_COLOR +
+                @"     ___     _              _        " + "\n" +
+                @"    / _ \ __| |____ _  __ _| |___  _ " + "\n" +
+                @"   | (_) / _` |_ / ' \/ _` | / / || |" + "\n" +
+                @"    \___/\__,_/__|_||_\__,_|_\_\\_, |" + "\n" +
+                @"                                |__/ " + "\x1b[0m"
             );
 
             Console.WriteLine(title);

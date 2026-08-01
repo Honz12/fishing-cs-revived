@@ -13,7 +13,6 @@ namespace fishing_cs_revived.src.Ui
         public static void DisplayShop(PlayerData playerData, Image character)
         {
             string title = (
-                "\n\n" +
                 Program.TITLE_COLOR + @"   ___  _        _            _ " + "\x1b[0m\n" +
                 Program.TITLE_COLOR + @"  / _ \| |__  __| |_  ___  __| |" + "\x1b[0m\n" +
                 Program.TITLE_COLOR + @" | (_) | '_ \/ _| ' \/ _ \/ _` |" + "\x1b[0m\n" +

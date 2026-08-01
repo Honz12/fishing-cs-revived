@@ -70,11 +70,11 @@ namespace fishing_cs_revived.src.Ui
 
         public static void ShowCatalog()
         {
-            string title = Program.TITLE_COLOR + @"  _  __     _        _             ___      _    
- | |/ /__ _| |_ __ _| |___  __ _  | _ \_  _| |__ 
- | ' </ _` |  _/ _` | / _ \/ _` | |   / || | '_ \
- |_|\_\__,_|\__\__,_|_\___/\__, | |_|_\\_, |_.__/
-                           |___/       |__/      " + "\n\x1b[0m";
+            string title = Program.TITLE_COLOR + @"   _  __     _        _             ___      _    
+  | |/ /__ _| |_ __ _| |___  __ _  | _ \_  _| |__ 
+  | ' </ _` |  _/ _` | / _ \/ _` | |   / || | '_ \
+  |_|\_\__,_|\__\__,_|_\___/\__, | |_|_\\_, |_.__/
+                             |___/       |__/      " + "\n\x1b[0m";
             
             Console.WriteLine(title);
 

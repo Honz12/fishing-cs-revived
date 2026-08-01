@@ -510,7 +510,6 @@ namespace fishing_cs_revived.src
 
 
                             string title =
-        "\n\n" +
         Program.TITLE_COLOR + @"  _____     _         _ _ " + "\x1b[0m\n" +
         Program.TITLE_COLOR + @" |_   _|_ _| |_  ___ (_) |" + "\x1b[0m\n" +
         Program.TITLE_COLOR + @"   | |/ _` | ' \/ -_)| |_|" + "\x1b[0m\n" +

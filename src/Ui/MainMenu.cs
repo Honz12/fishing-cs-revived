@@ -10,7 +10,6 @@ namespace fishing_cs_revived.src.Ui
         public static void DisplayMenu()
         {
             string title = (
-            "\n\n" +
             Program.TITLE_COLOR + @"   _  _ _               __  __  __                " + "\x1b[0m\n" +
             Program.TITLE_COLOR + @"  | || | |__ ___ ___ _ /_/ |  \/  |___ _ _ _  _   " + "\x1b[0m\n" +
             Program.TITLE_COLOR + @"  | __ | / _` \ V / ' \| | | |\/| / -_) ' \ || |  " + "\x1b[0m\n" +
