@@ -1,22 +1,25 @@
-public static class TFishFinder
+namespace fishing_cs_revived.src.Data
 {
-    /// <summary>
-    /// Find a random available fish.
-    /// </summary>
-    /// <param name="rodLevel">Player's Fishing Rod level.</param>
-    /// <returns>The fish template.</returns>
-    public static TFish FindRandomFish(int rodLevel)
+    public static class TFishFinder
     {
-        List<int> possible = new List<int>();
-
-        for (int i = 0; i < FishData.fishes.Length; i++)
+        /// <summary>
+        /// Find a random available fish.
+        /// </summary>
+        /// <param name="rodLevel">Player's Fishing Rod level.</param>
+        /// <returns>The fish template.</returns>
+        public static TFish FindRandomFish(int rodLevel)
         {
-            TFish fish = FishData.fishes[i];
+            List<int> possible = new List<int>();
 
-            if (rodLevel >= fish.RodLevel)
-                possible.Add(i);
+            for (int i = 0; i < FishData.fishes.Length; i++)
+            {
+                TFish fish = FishData.fishes[i];
+
+                if (rodLevel >= fish.RodLevel)
+                    possible.Add(i);
+            }
+
+            return FishData.fishes[possible[Program.Rng.Next(0, possible.Count)]];
         }
-
-        return FishData.fishes[possible[Program.Rng.Next(0, possible.Count)]];
     }
 }

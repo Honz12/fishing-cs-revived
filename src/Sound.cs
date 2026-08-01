@@ -1,28 +1,31 @@
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-
-public static class Sound
+namespace fishing_cs_revived.src
 {
-    public static void PlaySoundRawPath(string path)
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+
+    public static class Sound
     {
-        if (!Program.audioEnabled)
-            return;
+        public static void PlaySoundRawPath(string path)
+        {
+            if (!Program.audioEnabled)
+                return;
 
-        Process? process = Process.Start(
-            new ProcessStartInfo
-            {
-                FileName = "ffplay",
-                Arguments = $"-nodisp -autoexit -loglevel quiet \"{path}\"",
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        );
+            Process? process = Process.Start(
+                new ProcessStartInfo
+                {
+                    FileName = "ffplay",
+                    Arguments = $"-nodisp -autoexit -loglevel quiet \"{path}\"",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            );
 
-        //process?.WaitForExit();
-    }
+            //process?.WaitForExit();
+        }
 
-    public static void PlayAudioFile(string name)
-    {
-        PlaySoundRawPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "audio", name));
+        public static void PlayAudioFile(string name)
+        {
+            PlaySoundRawPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "audio", name));
+        }
     }
 }

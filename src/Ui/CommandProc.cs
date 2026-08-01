@@ -1,170 +1,175 @@
-public class CommandProc
+using fishing_cs_revived.src.Data;
+
+namespace fishing_cs_revived.src.Ui
 {
-    private static PlayerData data;
-
-    private static bool running = false;
-
-    private static string helpString = @"Kde Jsou Ryby!? Debug Command Interface
-
-Commands:
-    quit or exit                           Exits the Kde Jsou Ryby!? Debug Command Interface.
-    help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
-    money <amount>                  Sets the money of the player.
-    upgrade rod <level>             Sets the upgrade level of the fishing rod.
-    upgrade ship <level>            Sets the upgrade level of the shi°+p.
-    upgrade house <level>           Sets the upgrade level of the house.
-    fish list                       Lists all available fish.
-    fish add <fish_id>              Adds a fish to the player's inventory.
-    advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
-    sound                           Toggles sound on or off.
-";
-
-    public static void Enter(PlayerData playerData)
+    public class CommandProc
     {
-        Console.CursorVisible = true;
+        private static PlayerData? data;
 
-        data = playerData;
+        private static bool running = false;
 
-        Console.Clear();
-        Console.WriteLine("Welcome to Kde Jsou Ryby!? Debug Command Interface");
+        private static string helpString = @"Kde Jsou Ryby!? Debug Command Interface
 
-        running = true;
-        Loop();
-    }
+    Commands:
+        quit or exit                           Exits the Kde Jsou Ryby!? Debug Command Interface.
+        help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
+        money <amount>                  Sets the money of the player.
+        upgrade rod <level>             Sets the upgrade level of the fishing rod.
+        upgrade ship <level>            Sets the upgrade level of the shi°+p.
+        upgrade house <level>           Sets the upgrade level of the house.
+        fish list                       Lists all available fish.
+        fish add <fish_id>              Adds a fish to the player's inventory.
+        advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
+        sound                           Toggles sound on or off.
+    ";
 
-    private static void Loop()
-    {
-        while (running)
+        public static void Enter(PlayerData playerData)
         {
-            Console.Write(">>> ");
+            Console.CursorVisible = true;
 
-            string? input = Console.ReadLine();
+            data = playerData;
 
-            if (input != null)
+            Console.Clear();
+            Console.WriteLine("Welcome to Kde Jsou Ryby!? Debug Command Interface");
+
+            running = true;
+            Loop();
+        }
+
+        private static void Loop()
+        {
+            while (running)
             {
-                ProcessCommand(input);
+                Console.Write(">>> ");
+
+                string? input = Console.ReadLine();
+
+                if (input != null)
+                {
+                    ProcessCommand(input);
+                }
             }
         }
-    }
 
-    private static void ProcessCommand(string cmd)
-    {
-        List<string> parts = new List<string>();
-        string part = "";
-
-        foreach (char c in cmd)
+        private static void ProcessCommand(string cmd)
         {
-            if (c == ' ')
+            List<string> parts = new List<string>();
+            string part = "";
+
+            foreach (char c in cmd)
             {
-                parts.Add(part);
-                part = "";
+                if (c == ' ')
+                {
+                    parts.Add(part);
+                    part = "";
+                }
+                else
+                {
+                    part += c;
+                }
             }
-            else
+            parts.Add(part);
+            part = "";
+
+            switch (parts.Count)
             {
-                part += c;
-            }
-        }
-        parts.Add(part);
-        part = "";
-
-        switch (parts.Count)
-        {
-            case 1:
-                switch (parts[0])
-                {
-                    case "quit":
-                        Console.CursorVisible = false;
-                        running = false;
-                        break;
-                    case "exit":
-                        Console.CursorVisible = false;
-                        running = false;
-                        break;
-                    case "help":
-                        Console.Write(helpString);
-                        break;
-                    case "advrefresh":
-                        Program.CheckForNewAdvancements();
-                        Console.WriteLine("Advancements refreshed.");
-                        break;
-                    case "sound":
-                        Program.audioEnabled = !Program.audioEnabled;
-                        Console.WriteLine($"Sound is now {(Program.audioEnabled ? "enabled" : "disabled")}.");
-                        break;
-                }
-                break;
-            case 2:
-                switch (parts[0])
-                {
-                    case "money":
-                        {
-                            bool success = int.TryParse(parts[1], out int v);
-
-                            if (success)
-                                data.Money = (uint) v;
-                                Console.WriteLine($"Money set to {data.Money}.");
-                        }
-                        break;
-                    case "fish":
-                        if (parts[1] == "list")
-                        {
-                            Console.WriteLine("Available fish:");
-                            Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
-                            for (int i = 0; i < FishData.fishes.Length; i++)
+                case 1:
+                    switch (parts[0])
+                    {
+                        case "quit":
+                            Console.CursorVisible = false;
+                            running = false;
+                            break;
+                        case "exit":
+                            Console.CursorVisible = false;
+                            running = false;
+                            break;
+                        case "help":
+                            Console.Write(helpString);
+                            break;
+                        case "advrefresh":
+                            Program.CheckForNewAdvancements();
+                            Console.WriteLine("Advancements refreshed.");
+                            break;
+                        case "sound":
+                            Program.audioEnabled = !Program.audioEnabled;
+                            Console.WriteLine($"Sound is now {(Program.audioEnabled ? "enabled" : "disabled")}.");
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (parts[0])
+                    {
+                        case "money":
                             {
-                                TFish fish = FishData.fishes[i];
-                                Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
-                            }
-                        }
-                        break;
-                }
-                break;
-            case 3:
-                switch (parts[0])
-                {
-                    case "upgrade":
-                        {
-                            bool success = int.TryParse(parts[2], out int v);
+                                bool success = int.TryParse(parts[1], out int v);
 
-                            if (parts[1] == "rod")
-                            {
                                 if (success)
-                                    data.RodLevel = (ushort) v;
-                                    Console.WriteLine($"Rod level set to {data.RodLevel}.");
+                                    data!.Money = (uint) v;
+                                    Console.WriteLine($"Money set to {data!.Money}.");
                             }
-
-                            else if (parts[1] == "ship")
+                            break;
+                        case "fish":
+                            if (parts[1] == "list")
                             {
-                                if (success)
-                                    data.InventorySize = (byte) v;
-                                    Console.WriteLine($"Ship level set to {data.InventorySize}.");
-                            }
-                            
-                            else if (parts[1] == "house")
-                            {
-                                if (success)
-                                    data.HouseLevel = (byte) v;
-                                    Console.WriteLine($"House level set to {data.HouseLevel}.");
-                            }
-                        }
-                        break;
-                    case "fish":
-                        if (parts[1] == "add")
-                        {
-                            bool success = int.TryParse(parts[2], out int v);
-
-                            if (success)
-                                if (v >= 0 && v < FishData.fishes.Length)
+                                Console.WriteLine("Available fish:");
+                                Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
+                                for (int i = 0; i < FishData.fishes.Length; i++)
                                 {
-                                    Fish fish = new(FishData.fishes[v]);
-                                    Program.data.Inventory.Add(fish);
-                                    Console.WriteLine("Added fish to inventory.");
-                                    Program.DisplayImage(fish.Image, fish.GetFormatedData());
+                                    TFish fish = FishData.fishes[i];
+                                    Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
                                 }
-                        }
-                        break;
-                }
-                break;
+                            }
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (parts[0])
+                    {
+                        case "upgrade":
+                            {
+                                bool success = int.TryParse(parts[2], out int v);
+
+                                if (parts[1] == "rod")
+                                {
+                                    if (success)
+                                        data!.RodLevel = (ushort) v;
+                                        Console.WriteLine($"Rod level set to {data!.RodLevel}.");
+                                }
+
+                                else if (parts[1] == "ship")
+                                {
+                                    if (success)
+                                        data!.InventorySize = (byte) v;
+                                        Console.WriteLine($"Ship level set to {data!.InventorySize}.");
+                                }
+                                
+                                else if (parts[1] == "house")
+                                {
+                                    if (success)
+                                        data!.HouseLevel = (byte) v;
+                                        Console.WriteLine($"House level set to {data!.HouseLevel}.");
+                                }
+                            }
+                            break;
+                        case "fish":
+                            if (parts[1] == "add")
+                            {
+                                bool success = int.TryParse(parts[2], out int v);
+
+                                if (success)
+                                    if (v >= 0 && v < FishData.fishes.Length)
+                                    {
+                                        Fish fish = new(FishData.fishes[v]);
+                                        data!.Inventory.Add(fish);
+                                        Console.WriteLine("Added fish to inventory.");
+                                        Program.DisplayImage(fish.Image, fish.GetFormatedData());
+                                    }
+                            }
+                            break;
+                    }
+                    break;
+            }
         }
     }
 }

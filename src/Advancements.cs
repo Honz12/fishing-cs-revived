@@ -1,109 +1,114 @@
-public class Advancement
+using fishing_cs_revived.src.Data;
+
+namespace fishing_cs_revived.src
 {
-    public required string Name;
-    public required string Description;
-    public required string IconName;
-    public required string Id;
-}
-
-
-
-public static class AdvancementProcessor
-{
-    static List<string> unlockedAdvancementIds = new();
-
-    /// <summary>
-    /// Checks if the player has unlocked any new advancements based on their current data.
-    /// If not returns null, otherwise returns the Advancement object that was unlocked.
-    /// </summary>
-    /// <param name="playerData"></param>
-    /// <returns></returns>
-    public static int AdvancementCount = 6;
-    public static Advancement? CheckForNewAdvancements(PlayerData playerData)
+    public class Advancement
     {
-        bool hasKraken = false;
+        public required string Name;
+        public required string Description;
+        public required string IconName;
+        public required string Id;
+    }
 
-        foreach (Fish fish in Program.data.Inventory)
+
+
+    public static class AdvancementProcessor
+    {
+        static List<string> unlockedAdvancementIds = new();
+
+        /// <summary>
+        /// Checks if the player has unlocked any new advancements based on their current data.
+        /// If not returns null, otherwise returns the Advancement object that was unlocked.
+        /// </summary>
+        /// <param name="playerData"></param>
+        /// <returns></returns>
+        public static int AdvancementCount = 6;
+        public static Advancement? CheckForNewAdvancements(PlayerData playerData)
         {
-            if (fish.Rarity == FishRarity.Kraken)
+            bool hasKraken = false;
+
+            foreach (Fish fish in Program.data.Inventory)
             {
-                hasKraken = true;
-                break;
+                if (fish.Rarity == FishRarity.Kraken)
+                {
+                    hasKraken = true;
+                    break;
+                }
             }
-        }
 
-        if (playerData.Inventory.Count > 0 && !unlockedAdvancementIds.Contains("prvniUlovek"))
-        {
-            unlockedAdvancementIds.Add("prvniUlovek");
-            return new Advancement()
+            if (playerData.Inventory.Count > 0 && !unlockedAdvancementIds.Contains("prvniUlovek"))
             {
-                Name = "1. Úlovek!",
-                Description = "Chyť svou první rybu.",
-                IconName = "prvniUlovek.txt",
-                Id = "prvniUlovek"
-            };
-        }
+                unlockedAdvancementIds.Add("prvniUlovek");
+                return new Advancement()
+                {
+                    Name = "1. Úlovek!",
+                    Description = "Chyť svou první rybu.",
+                    IconName = "prvniUlovek.txt",
+                    Id = "prvniUlovek"
+                };
+            }
 
-        else if (Program.data.RodLevel == 1 && !unlockedAdvancementIds.Contains("poradnyPrut"))
-        {
-            unlockedAdvancementIds.Add("poradnyPrut");
-            return new Advancement()
+            else if (Program.data.RodLevel == 1 && !unlockedAdvancementIds.Contains("poradnyPrut"))
             {
-                Name = "Konečně pořádný prut!",
-                Description = "Upgraduj poprvé svůj prut.",
-                IconName = "poradnyPrut.txt",
-                Id = "poradnyPrut"
-            };
-        }
-        
-        else if (Program.data.HouseLevel == 1 && !unlockedAdvancementIds.Contains("domaNejlip"))
-        {
-            unlockedAdvancementIds.Add("domaNejlip");
-            return new Advancement()
+                unlockedAdvancementIds.Add("poradnyPrut");
+                return new Advancement()
+                {
+                    Name = "Konečně pořádný prut!",
+                    Description = "Upgraduj poprvé svůj prut.",
+                    IconName = "poradnyPrut.txt",
+                    Id = "poradnyPrut"
+                };
+            }
+            
+            else if (Program.data.HouseLevel == 1 && !unlockedAdvancementIds.Contains("domaNejlip"))
             {
-                Name = "Všude dobře, doma nejlíp!",
-                Description = "Kup si svůj první dům.",
-                IconName = "domaNejlip.txt",
-                Id = "domaNejlip"
-            };
-        }
-        
-        else if (hasKraken && !unlockedAdvancementIds.Contains("chytKrakena"))
-        {
-            unlockedAdvancementIds.Add("chytKrakena");
-            return new Advancement()
+                unlockedAdvancementIds.Add("domaNejlip");
+                return new Advancement()
+                {
+                    Name = "Všude dobře, doma nejlíp!",
+                    Description = "Kup si svůj první dům.",
+                    IconName = "domaNejlip.txt",
+                    Id = "domaNejlip"
+                };
+            }
+            
+            else if (hasKraken && !unlockedAdvancementIds.Contains("chytKrakena"))
             {
-                Name = "Co to je?!",
-                Description = "Chyť Krakena.",
-                IconName = "chytKrakena.txt",
-                Id = "chytKrakena"
-            };
-        }
-        
-        else if (Program.data.HouseLevel >= 4 && !unlockedAdvancementIds.Contains("tatuvTelefonat"))
-        {
-            unlockedAdvancementIds.Add("tatuvTelefonat");
-            return new Advancement()
+                unlockedAdvancementIds.Add("chytKrakena");
+                return new Advancement()
+                {
+                    Name = "Co to je?!",
+                    Description = "Chyť Krakena.",
+                    IconName = "chytKrakena.txt",
+                    Id = "chytKrakena"
+                };
+            }
+            
+            else if (Program.data.HouseLevel >= 4 && !unlockedAdvancementIds.Contains("tatuvTelefonat"))
             {
-                Name = "Tátův telefonát.",
-                Description = "Táta ti zavolal.",
-                IconName = "tatuvTelefonat.txt",
-                Id = "tatuvTelefonat"
-            };
-        }
+                unlockedAdvancementIds.Add("tatuvTelefonat");
+                return new Advancement()
+                {
+                    Name = "Tátův telefonát.",
+                    Description = "Táta ti zavolal.",
+                    IconName = "tatuvTelefonat.txt",
+                    Id = "tatuvTelefonat"
+                };
+            }
 
-        else if (Program.data.HouseLevel >= 4 && Program.data.RodLevel == 10 && Program.data.InventorySize >= 4 && !unlockedAdvancementIds.Contains("max"))
-        {
-            unlockedAdvancementIds.Add("max");
-            return new Advancement()
+            else if (Program.data.HouseLevel >= 4 && Program.data.RodLevel == 10 && Program.data.InventorySize >= 4 && !unlockedAdvancementIds.Contains("max"))
             {
-                Name = "Max!",
-                Description = "Koupil jsi všechny upgrady.",
-                IconName = "max.txt",
-                Id = "max"
-            };
-        }
+                unlockedAdvancementIds.Add("max");
+                return new Advancement()
+                {
+                    Name = "Max!",
+                    Description = "Koupil jsi všechny upgrady.",
+                    IconName = "max.txt",
+                    Id = "max"
+                };
+            }
 
-        return null; 
+            return null; 
+        }
     }
 }
