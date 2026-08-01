@@ -21,7 +21,11 @@ namespace fishing_cs_revived.src.Ui
         fish add <fish_id>              Adds a fish to the player's inventory.
         advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
         sound                           Toggles sound on or off.
-    ";
+        catalog add <fish_id>           Adds a fish id to the catalog.
+        catalog add all                 Adds all the fish to the catalog.
+        catalog rem <fish_id>           Removes a fish id from the catalog.
+        catalog rem all                 Removes all the fish from the catalog.
+";
 
         public static void Enter(PlayerData playerData)
         {
@@ -110,14 +114,16 @@ namespace fishing_cs_revived.src.Ui
                             }
                             break;
                         case "fish":
-                            if (parts[1] == "list")
                             {
-                                Console.WriteLine("Available fish:");
-                                Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
-                                for (int i = 0; i < FishData.fishes.Length; i++)
+                                if (parts[1] == "list")
                                 {
-                                    TFish fish = FishData.fishes[i];
-                                    Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
+                                    Console.WriteLine("Available fish:");
+                                    Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
+                                    for (int i = 0; i < FishData.fishes.Length; i++)
+                                    {
+                                        TFish fish = FishData.fishes[i];
+                                        Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
+                                    }
                                 }
                             }
                             break;
@@ -153,18 +159,55 @@ namespace fishing_cs_revived.src.Ui
                             }
                             break;
                         case "fish":
-                            if (parts[1] == "add")
                             {
-                                bool success = int.TryParse(parts[2], out int v);
+                                if (parts[1] == "add")
+                                {
+                                    bool success = int.TryParse(parts[2], out int v);
 
-                                if (success)
-                                    if (v >= 0 && v < FishData.fishes.Length)
+                                    if (success)
+                                        if (v >= 0 && v < FishData.fishes.Length)
+                                        {
+                                            Fish fish = new(FishData.fishes[v]);
+                                            data!.Inventory.Add(fish);
+                                            Console.WriteLine("Added fish to inventory.");
+                                            Program.DisplayImage(fish.Image, fish.GetFormatedData());
+                                        }
+                                }
+                            }
+                            break;
+                        case "catalog":
+                            {
+                                if (parts[1] == "add")
+                                {
+                                    if (parts[2] == "all")
                                     {
-                                        Fish fish = new(FishData.fishes[v]);
-                                        data!.Inventory.Add(fish);
-                                        Console.WriteLine("Added fish to inventory.");
-                                        Program.DisplayImage(fish.Image, fish.GetFormatedData());
+                                        for (int i = 0; i < FishData.fishes.Length; i++)
+                                        {
+                                            CatalogUi.UnlockFish(i);
+                                        }
+                                        break;
                                     }
+                                    bool success = int.TryParse(parts[2], out int v);
+
+                                    if (success)
+                                        CatalogUi.UnlockFish(v);
+                                }
+                                else if (parts[1] == "rem")
+                                {
+                                    
+                                    if (parts[2] == "all")
+                                    {
+                                        for (int i = 0; i < FishData.fishes.Length; i++)
+                                        {
+                                            CatalogUi.UnUnlockFish(i);
+                                        }
+                                        break;
+                                    }
+                                    bool success = int.TryParse(parts[2], out int v);
+
+                                    if (success)
+                                        CatalogUi.UnUnlockFish(v);
+                                }
                             }
                             break;
                     }

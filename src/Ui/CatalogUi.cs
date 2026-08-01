@@ -43,5 +43,11 @@ namespace fishing_cs_revived.src.Ui
             if (!unlockedFishIds.Contains(fishId))
                 unlockedFishIds.Add(fishId);
         }
+
+        public static void UnUnlockFish(int fishId)
+        {
+            if (unlockedFishIds.Contains(fishId))
+                unlockedFishIds.Remove(fishId);
+        }
     }
 }
