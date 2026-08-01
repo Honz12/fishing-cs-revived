@@ -40,7 +40,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 1,
                 PricePerKg = 16,
                 IsSea = false,
-                Image = "kaprObecny.txt"
+                Image = "kaprObecny.img"
             },
             new TFish() {
                 Name = "Pstruh duhový",
@@ -50,7 +50,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 1,
                 IsSea = false,
                 PricePerKg = 195,
-                Image = "pstruhDuhovy.txt"
+                Image = "pstruhDuhovy.img"
             },
             new TFish() {
                 Name = "Štika obecná",
@@ -60,7 +60,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = false,
                 PricePerKg = 66,
-                Image = "stikaObecna.txt"
+                Image = "stikaObecna.img"
             },
             new TFish() {
                 Name = "Candát obecný",
@@ -70,7 +70,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = false,
                 PricePerKg = 140,
-                Image = "candatObecny.txt"
+                Image = "candatObecny.img"
             },
             new TFish() {
                 Name = "Sumec velký",
@@ -80,7 +80,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 6,
                 IsSea = false,
                 PricePerKg = 15,
-                Image = "sumecVelky.txt"
+                Image = "sumecVelky.img"
             },
             new TFish() {
                 Name = "Okoun říční",
@@ -90,7 +90,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 0,
                 IsSea = false,
                 PricePerKg = 400,
-                Image = "okounRicni.txt"
+                Image = "okounRicni.img"
             },
             new TFish() {
                 Name = "Lín obecný",
@@ -100,7 +100,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 0,
                 IsSea = false,
                 PricePerKg = 166,
-                Image = "linObecny.txt"
+                Image = "linObecny.img"
             },
             new TFish() {
                 Name = "Jeseter velký",
@@ -110,7 +110,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 4,
                 IsSea = false,
                 PricePerKg = 35,
-                Image = "jeseterVelky.txt"
+                Image = "jeseterVelky.img"
             },
             new TFish() {
                 Name = "Úhoř říční",
@@ -120,7 +120,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 1,
                 IsSea = false,
                 PricePerKg = 722,
-                Image = "uhorRicni.txt"
+                Image = "uhorRicni.img"
             },
             new TFish() {
                 Name = "Amur bílý",
@@ -130,7 +130,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 3,
                 IsSea = false,
                 PricePerKg = 25,
-                Image = "amurBily.txt"
+                Image = "amurBily.img"
             },
 
             // MOŘSKÉ RYBY
@@ -142,7 +142,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 4,
                 IsSea = true,
                 PricePerKg = 90,
-                Image = "lososObecny.txt"
+                Image = "lososObecny.img"
             },
             new TFish() {
                 Name = "Treska tmavá",
@@ -152,7 +152,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 3,
                 IsSea = true,
                 PricePerKg = 80,
-                Image = "treskaTmava.txt"
+                Image = "treskaTmava.img"
             },
             new TFish() {
                 Name = "Tuňák obecný",
@@ -162,7 +162,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 8,
                 IsSea = true,
                 PricePerKg = 7,
-                Image = "tunakObecny.txt"
+                Image = "tunakObecny.img"
             },
             new TFish() {
                 Name = "Sardinka obecná",
@@ -172,7 +172,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = true,
                 PricePerKg = 2500,
-                Image = "sardinkaObecna.txt"
+                Image = "sardinkaObecna.img"
             },
             new TFish() {
                 Name = "Sleď obecný",
@@ -182,7 +182,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = true,
                 PricePerKg = 520,
-                Image = "sledObecny.txt"
+                Image = "sledObecny.img"
             },
             new TFish() {
                 Name = "Makrela obecná",
@@ -192,7 +192,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = true,
                 PricePerKg = 292,
-                Image = "makrelaObecna.txt"
+                Image = "makrelaObecna.img"
             },
             new TFish() {
                 Name = "Platýs bradavičnatý",
@@ -202,7 +202,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 3,
                 IsSea = true,
                 PricePerKg = 304,
-                Image = "platysBradavicnaty.txt"
+                Image = "platysBradavicnaty.img"
             },
             new TFish() {
                 Name = "Pražman zlatý",
@@ -212,7 +212,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 2,
                 IsSea = true,
                 PricePerKg = 500,
-                Image = "prazmanZlaty.txt"
+                Image = "prazmanZlaty.img"
             },
             new TFish() {
                 Name = "Mořský ďas",
@@ -222,7 +222,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 5,
                 IsSea = true,
                 PricePerKg = 82,
-                Image = "morskyDas.txt"
+                Image = "morskyDas.img"
             },
             new TFish() {
                 Name = "Mečoun obecný",
@@ -232,7 +232,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 7,
                 IsSea = true,
                 PricePerKg = 7,
-                Image = "mecounObecny.txt"
+                Image = "mecounObecny.img"
             },
             new TFish() {
                 Name = "Čtverzubec fugu",
@@ -242,7 +242,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 9,
                 IsSea = true,
                 PricePerKg = 750,
-                Image = "puffer.txt"
+                Image = "puffer.img"
             },
             new TFish() {
                 Name = "Kraken",
@@ -252,7 +252,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 10,
                 IsSea = true,
                 PricePerKg = 11,
-                Image = "kraken.txt"
+                Image = "kraken.img"
             }
         };
     }

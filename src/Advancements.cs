@@ -43,7 +43,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "1. Úlovek!",
                     Description = "Chyť svou první rybu.",
-                    IconName = "prvniUlovek.txt",
+                    IconName = "prvniUlovek.img",
                     Id = "prvniUlovek"
                 };
             }
@@ -55,7 +55,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "Konečně pořádný prut!",
                     Description = "Upgraduj poprvé svůj prut.",
-                    IconName = "poradnyPrut.txt",
+                    IconName = "poradnyPrut.img",
                     Id = "poradnyPrut"
                 };
             }
@@ -67,7 +67,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "Všude dobře, doma nejlíp!",
                     Description = "Kup si svůj první dům.",
-                    IconName = "domaNejlip.txt",
+                    IconName = "domaNejlip.img",
                     Id = "domaNejlip"
                 };
             }
@@ -79,7 +79,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "Co to je?!",
                     Description = "Chyť Krakena.",
-                    IconName = "chytKrakena.txt",
+                    IconName = "chytKrakena.img",
                     Id = "chytKrakena"
                 };
             }
@@ -91,7 +91,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "Tátův telefonát.",
                     Description = "Táta ti zavolal.",
-                    IconName = "tatuvTelefonat.txt",
+                    IconName = "tatuvTelefonat.img",
                     Id = "tatuvTelefonat"
                 };
             }
@@ -103,7 +103,7 @@ namespace fishing_cs_revived.src
                 {
                     Name = "Max!",
                     Description = "Koupil jsi všechny upgrady.",
-                    IconName = "max.txt",
+                    IconName = "max.img",
                     Id = "max"
                 };
             }

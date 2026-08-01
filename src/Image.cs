@@ -35,7 +35,7 @@ namespace fishing_cs_revived.src
             }
             catch
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "images", "fish", "uhorRicniEletricky.txt");
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "images", "fish", "uhorRicniEletricky.img");
                 contents = File.ReadAllText(path);
             }
 

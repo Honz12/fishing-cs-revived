@@ -31,7 +31,7 @@ namespace fishing_cs_revived.src
             Weight = 0.0;
             RodLevel = 0;
             IsSea = false;
-            Image = new Image("fish", "uhorRicniEletricky.txt");
+            Image = new Image("fish", "uhorRicniEletricky.img");
             Rarity = FishRarity.Common;
             PricePerKg = 0.0;
         }

@@ -48,7 +48,7 @@ namespace fishing_cs_revived.src
         private static bool currentlyCatching = false;
         private static int catchingOffset = 0;
         private static int catchingVel = 0;
-        private static Image shopSeller = new("characters", "civil0.txt");
+        private static Image shopSeller = new("characters", "civil0.img");
         private static bool storySkipped = false;
 
         public static bool audioEnabled = true;
@@ -363,20 +363,20 @@ namespace fishing_cs_revived.src
     - Vytvořil nápady pro několik systémů.
     ";
 
-            DisplayImage(new Image("ui", "csLogo.txt"), credits);
+            DisplayImage(new Image("ui", "csLogo.img"), credits);
 
             Console.WriteLine(TITLE_COLOR + vyvojariText + "\x1b[0m");
 
             DisplayImage(
-                new Image("ui", "iconHonz12.txt"),
+                new Image("ui", "iconHonz12.img"),
                 honz12Text
             );
             DisplayImage(
-                new Image("ui", "iconMistrmatej.txt"),
+                new Image("ui", "iconMistrmatej.img"),
                 mistrmatejText
             );
             DisplayImage(
-                new Image("ui", "iconSebastianjecny.txt"),
+                new Image("ui", "iconSebastianjecny.img"),
                 sebastianjecnyText
             );
 
@@ -414,9 +414,9 @@ namespace fishing_cs_revived.src
 
             shopSeller = new Image("characters", (new string[]
             {
-                "civil0.txt", "civil1.txt", "civil2.txt",
-                "kapitan.txt", "namornik.txt", "pepek.txt",
-                "rybar0.txt", "rybar1.txt", "rybar2.txt", "rybar3.txt"
+                "civil0.img", "civil1.img", "civil2.img",
+                "kapitan.img", "namornik.img", "pepek.img",
+                "rybar0.img", "rybar1.img", "rybar2.img", "rybar3.img"
             })[Rng.Next(0, 10)]);
 
             Console.CursorVisible = false;
@@ -437,7 +437,7 @@ namespace fishing_cs_revived.src
     @"  / /| / /_/ /  __/  / /_/ (__  ) /_/ / /_/ /  / _, _/ /_/ / /_/ / /_/ /    /_//_/   " + '\n' +
     @" /_/ |_\__,_/\___/   \____/____/\____/\__,_/  /_/ |_|\__, /_.___/\__, /    (_)(_)    " + '\n' +
     @"                                                    /____/      /____/               " + "\n";
-                            DisplayImage(new Image("ship", "lod3.txt"), title, TITLE_COLOR); // Display the images/ship/lod3.txt image (the icon of the game), with the title.
+                            DisplayImage(new Image("ship", "lod3.img"), title, TITLE_COLOR); // Display the images/ship/lod3.img image (the icon of the game), with the title.
 
                             Console.WriteLine("Jakákoliv klávesa pro pokračování ...");
 

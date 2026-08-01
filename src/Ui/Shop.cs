@@ -74,9 +74,9 @@ namespace fishing_cs_revived.src.Ui
             Program.DisplayMultipleImages( // Display the fishing rod and the boat images.
                 new Image[]
                 {
-                    new("rod", $"prut{playerData.RodLevel}.txt"),
-                    new("ship", $"lod{playerData.InventorySize}.txt"),
-                    new("houses", $"dum{playerData.HouseLevel}.txt"),
+                    new("rod", $"prut{playerData.RodLevel}.img"),
+                    new("ship", $"lod{playerData.InventorySize}.img"),
+                    new("houses", $"dum{playerData.HouseLevel}.img"),
                 }
             );
         }
