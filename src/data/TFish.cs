@@ -27,6 +27,6 @@ namespace fishing_cs_revived.src.Data
         public required FishRarity Rarity;
         public required double PricePerKg;
         public required FishLocation[] AvaiableLocations;
-        public ushort Chance = 1;
+        public required ushort Chance;
     }
 }
