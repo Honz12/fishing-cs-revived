@@ -18,7 +18,9 @@ namespace fishing_cs_revived.src
         public List<Fish> Inventory = new();
 
         public GameState GameState = GameState.BootScreen;
+
         public List<Advancement> Advancements = [];
+        public List<string> unlockedAdvancementIds = [];
     }
 
     public class Program
