@@ -32,9 +32,9 @@ namespace fishing_cs_revived.src
                 }
             }
 
-            if (playerData.Inventory.Count > 0 && !playerData.unlockedAdvancementIds.Contains("prvniUlovek"))
+            if (playerData.Inventory.Count > 0 && !playerData.UnlockedAdvancementIds.Contains("prvniUlovek"))
             {
-                playerData.unlockedAdvancementIds.Add("prvniUlovek");
+                playerData.UnlockedAdvancementIds.Add("prvniUlovek");
                 return new Advancement()
                 {
                     Name = "1. Úlovek!",
@@ -44,9 +44,9 @@ namespace fishing_cs_revived.src
                 };
             }
 
-            else if (Program.data.RodLevel == 1 && !playerData.unlockedAdvancementIds.Contains("poradnyPrut"))
+            else if (Program.data.RodLevel == 1 && !playerData.UnlockedAdvancementIds.Contains("poradnyPrut"))
             {
-                playerData.unlockedAdvancementIds.Add("poradnyPrut");
+                playerData.UnlockedAdvancementIds.Add("poradnyPrut");
                 return new Advancement()
                 {
                     Name = "Konečně pořádný prut!",
@@ -56,9 +56,9 @@ namespace fishing_cs_revived.src
                 };
             }
             
-            else if (Program.data.HouseLevel == 1 && !playerData.unlockedAdvancementIds.Contains("domaNejlip"))
+            else if (Program.data.HouseLevel == 1 && !playerData.UnlockedAdvancementIds.Contains("domaNejlip"))
             {
-                playerData.unlockedAdvancementIds.Add("domaNejlip");
+                playerData.UnlockedAdvancementIds.Add("domaNejlip");
                 return new Advancement()
                 {
                     Name = "Všude dobře, doma nejlíp!",
@@ -68,9 +68,9 @@ namespace fishing_cs_revived.src
                 };
             }
             
-            else if (hasKraken && !playerData.unlockedAdvancementIds.Contains("chytKrakena"))
+            else if (hasKraken && !playerData.UnlockedAdvancementIds.Contains("chytKrakena"))
             {
-                playerData.unlockedAdvancementIds.Add("chytKrakena");
+                playerData.UnlockedAdvancementIds.Add("chytKrakena");
                 return new Advancement()
                 {
                     Name = "Co to je?!",
@@ -80,9 +80,9 @@ namespace fishing_cs_revived.src
                 };
             }
             
-            else if (Program.data.HouseLevel >= 4 && !playerData.unlockedAdvancementIds.Contains("tatuvTelefonat"))
+            else if (Program.data.HouseLevel >= 4 && !playerData.UnlockedAdvancementIds.Contains("tatuvTelefonat"))
             {
-                playerData.unlockedAdvancementIds.Add("tatuvTelefonat");
+                playerData.UnlockedAdvancementIds.Add("tatuvTelefonat");
                 return new Advancement()
                 {
                     Name = "Tátův telefonát.",
@@ -92,9 +92,9 @@ namespace fishing_cs_revived.src
                 };
             }
 
-            else if (Program.data.HouseLevel >= 4 && Program.data.RodLevel == 10 && Program.data.InventorySize >= 4 && !playerData.unlockedAdvancementIds.Contains("max"))
+            else if (Program.data.HouseLevel >= 4 && Program.data.RodLevel == 10 && Program.data.InventorySize >= 4 && !playerData.UnlockedAdvancementIds.Contains("max"))
             {
-                playerData.unlockedAdvancementIds.Add("max");
+                playerData.UnlockedAdvancementIds.Add("max");
                 return new Advancement()
                 {
                     Name = "Max!",

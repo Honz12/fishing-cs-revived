@@ -2,6 +2,12 @@ using fishing_cs_revived.src.Data;
 
 namespace fishing_cs_revived.src
 {
+    public class FishSaveData
+    {
+        public int Id;
+        public double Weight;
+    }
+
     public class Fish
     {
         public string Name;
@@ -12,9 +18,12 @@ namespace fishing_cs_revived.src
         public FishRarity Rarity;
         public double PricePerKg;
         public double AverageWeight;
+        public int Id;
 
-        public Fish(TFish template) // Constructor
+        public Fish(int id) // Constructor
         {
+            TFish template = FishData.fishes[id];
+
             Name = template.Name;
             Weight = Math.Round((template.Weight + template.WeightVar * (Program.Rng.NextDouble() * 2.0 - 1.0)) * 100.0) / 100.0;
             RodLevel = template.RodLevel;
@@ -23,6 +32,7 @@ namespace fishing_cs_revived.src
             Rarity = template.Rarity;
             PricePerKg = template.PricePerKg;
             AverageWeight = template.Weight;
+            Id = id;
         }
 
         public Fish() // Slop Constructor
@@ -34,6 +44,7 @@ namespace fishing_cs_revived.src
             Image = new Image("fish", "uhorRicniEletricky.img");
             Rarity = FishRarity.Common;
             PricePerKg = 0.0;
+            Id = -1;
         }
 
         /// <summary>
@@ -56,6 +67,19 @@ namespace fishing_cs_revived.src
         public string GetInfoCompact()
         {
             return $"{Name, -20} | Váha: {Weight, -6} Kg | {Program.GetTransRarity(Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(Rarity).Length)} | Cena: {(uint) (PricePerKg * Weight)}";
+        }
+
+        /// <summary>
+        /// Gets the save data of the fish.
+        /// </summary>
+        /// <returns></returns>
+        public FishSaveData GetSaveData()
+        {
+            return new()
+            {
+                Id = Id,
+                Weight = Weight
+            };
         }
     }
 }

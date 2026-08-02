@@ -20,7 +20,7 @@ namespace fishing_cs_revived.src
         public GameState GameState = GameState.BootScreen;
 
         public List<Advancement> Advancements = [];
-        public List<string> unlockedAdvancementIds = [];
+        public List<string> UnlockedAdvancementIds = [];
     }
 
     public class Program
@@ -713,7 +713,7 @@ namespace fishing_cs_revived.src
             catchingCenterSize = Rng.Next(10, 20);
             requiredCatchingTicks = (uint)Rng.Next(20, 50);
             catchingFishId = TFishFinder.FindRandomFish(data.RodLevel);
-            catchingFish = new Fish(FishData.fishes[catchingFishId]);
+            catchingFish = new Fish(catchingFishId);
             catchingOffset = 0;
             if ((int) catchingFish.Rarity >= (int) FishRarity.Rare)
             {

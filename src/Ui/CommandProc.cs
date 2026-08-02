@@ -25,6 +25,7 @@ namespace fishing_cs_revived.src.Ui
         catalog add all                 Adds all the fish to the catalog.
         catalog rem <fish_id>           Removes a fish id from the catalog.
         catalog rem all                 Removes all the fish from the catalog.
+        save                            Saves the game.
 ";
 
         public static void Enter(PlayerData playerData)
@@ -99,6 +100,12 @@ namespace fishing_cs_revived.src.Ui
                             Program.audioEnabled = !Program.audioEnabled;
                             Console.WriteLine($"Sound is now {(Program.audioEnabled ? "enabled" : "disabled")}.");
                             break;
+                        case "save":
+                            if (SaveGameHandler.SaveGame(data!))
+                                Console.WriteLine("Saved successfully.");
+                            else
+                                Console.WriteLine("Save failed.");
+                            break;
                     }
                     break;
                 case 2:
@@ -167,7 +174,7 @@ namespace fishing_cs_revived.src.Ui
                                     if (success)
                                         if (v >= 0 && v < FishData.fishes.Length)
                                         {
-                                            Fish fish = new(FishData.fishes[v]);
+                                            Fish fish = new(v);
                                             data!.Inventory.Add(fish);
                                             Console.WriteLine("Added fish to inventory.");
                                             Program.DisplayImage(fish.Image, fish.GetFormatedData());
