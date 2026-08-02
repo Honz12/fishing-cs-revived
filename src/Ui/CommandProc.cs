@@ -20,6 +20,8 @@ namespace fishing_cs_revived.src.Ui
         fish list                       Lists all available fish.
         fish add <fish_id>              Adds a fish to the player's inventory.
         fish add all                    Adds all the fish to the player's inventory.
+        adv add all                     Adds all the advancements to the player's data.
+        adv add <advancement_id>        Adds a specific advancement to the player's data.
         advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
         sound                           Toggles sound on or off.
         catalog add <fish_id>           Adds a fish id to the catalog.
@@ -306,6 +308,30 @@ namespace fishing_cs_revived.src.Ui
                                         CatalogUi.UnUnlockFish(v);
                                         Console.WriteLine("Removed an entry from catalog.");
                                     }
+                                }
+                            }
+                            break;
+                        case "adv":
+                            {
+                                if (parts[1] == "add")
+                                {
+                                    if (parts[2] == "all")
+                                    {
+                                        AdvancementProcessor.UnlockAll(data!);
+                                        Console.WriteLine("Added all advancements to the player's data.");
+                                        Program.CheckForNewAdvancements();
+                                        Console.WriteLine("Advancements refreshed.");
+                                        break;
+                                    }
+                                    bool success = AdvancementProcessor.UnlockById(data!, parts[2]);
+                                    if (success)
+                                    {
+                                        Console.WriteLine("Added advancement to the player's data.");
+                                        Program.CheckForNewAdvancements();
+                                        Console.WriteLine("Advancements refreshed.");
+                                    }
+                                    else
+                                        Console.WriteLine("Invalid advancement id.");
                                 }
                             }
                             break;

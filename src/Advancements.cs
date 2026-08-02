@@ -216,5 +216,47 @@ namespace fishing_cs_revived.src
 
             return null;
         }
+
+        public static void UnlockAll(PlayerData playerData)
+        {
+            foreach (Definition definition in Definitions)
+            {
+                if (!playerData.UnlockedAdvancementIds.Contains(definition.Id))
+                {
+                    playerData.UnlockedAdvancementIds.Add(definition.Id);
+                    playerData.Advancements.Add(new Advancement()
+                    {
+                        Name = definition.Name,
+                        Description = definition.Description,
+                        IconName = definition.IconName,
+                        Id = definition.Id
+                    });
+                }
+            }
+        }
+
+        public static bool UnlockById(PlayerData playerData, string id)
+        {
+            foreach (Definition definition in Definitions)
+            {
+                if (definition.Id == id)
+                {
+                    if (!playerData.UnlockedAdvancementIds.Contains(definition.Id))
+                    {
+                        playerData.UnlockedAdvancementIds.Add(definition.Id);
+                        playerData.Advancements.Add(new Advancement()
+                        {
+                            Name = definition.Name,
+                            Description = definition.Description,
+                            IconName = definition.IconName,
+                            Id = definition.Id
+                        });
+                    }
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
