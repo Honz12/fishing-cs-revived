@@ -581,7 +581,7 @@ namespace fishing_cs_revived.src
         Program.TITLE_COLOR + @"                   |__/   ";
 
                             Console.WriteLine(title);
-                            Console.WriteLine($"Právě se nacházíš na {data.CurrentLocation}");
+                            Console.WriteLine($"Právě se nacházíš na {GetTransLocation(data.CurrentLocation)}");
                             Console.WriteLine();
 
                             Console.WriteLine(

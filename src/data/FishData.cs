@@ -159,7 +159,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.2, // 0.1 kg – 0.5 kg
                 RodLevel = 0,
                 IsSea = false,
-                PricePerKg = 100,
+                PricePerKg = 300,
                 Image = "ploticeObecna.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -171,7 +171,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.03, // 0.02 kg – 0.08 kg
                 RodLevel = 0,
                 IsSea = false,
-                PricePerKg = 450,
+                PricePerKg = 4000,
                 Image = "ouklejObecna.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -183,7 +183,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 1.0, // 1.0 kg – 3.0 kg
                 RodLevel = 1,
                 IsSea = false,
-                PricePerKg = 30,
+                PricePerKg = 100,
                 Image = "cejnVelky.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -195,7 +195,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.3, // 0.1 kg – 0.7 kg
                 RodLevel = 0,
                 IsSea = false,
-                PricePerKg = 65,
+                PricePerKg = 200,
                 Image = "karasStribrity.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -207,7 +207,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 2.0, // 1.0 kg – 5.0 kg
                 RodLevel = 3,
                 IsSea = false,
-                PricePerKg = 45,
+                PricePerKg = 40,
                 Image = "bolenDravy.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -255,7 +255,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 400.0, // 100.0 kg – 900.0 kg
                 RodLevel = 6,
                 IsSea = false,
-                PricePerKg = 30,
+                PricePerKg = 12,
                 Image = "vyzaVelka.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -267,7 +267,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 80.0, // 20.0 kg – 180.0 kg
                 RodLevel = 6,
                 IsSea = false,
-                PricePerKg = 40,
+                PricePerKg = 20,
                 Image = "arapaimaVelka.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -413,7 +413,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.02, // 0.02 kg – 0.06 kg
                 RodLevel = 2,
                 IsSea = true,
-                PricePerKg = 1200,
+                PricePerKg = 5000,
                 Image = "sprotObecny.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -449,7 +449,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 1.5, // 0.5 kg – 3.5 kg
                 RodLevel = 3,
                 IsSea = true,
-                PricePerKg = 70,
+                PricePerKg = 150,
                 Image = "treskaJednoskvrnna.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -473,7 +473,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 6.0, // 2.0 kg – 14.0 kg
                 RodLevel = 5,
                 IsSea = true,
-                PricePerKg = 60,
+                PricePerKg = 80,
                 Image = "uhorMorsky.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -485,7 +485,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 8.0, // 2.0 kg – 18.0 kg
                 RodLevel = 6,
                 IsSea = true,
-                PricePerKg = 40,
+                PricePerKg = 60,
                 Image = "barakudaObecna.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -507,7 +507,7 @@ namespace fishing_cs_revived.src.Data
                 Chance = 2,
                 Weight = 300.0,
                 WeightVar = 200.0, // 100.0 kg – 500.0 kg
-                RodLevel = 9,
+                RodLevel = 2,
                 IsSea = true,
                 PricePerKg = 15,
                 Image = "marlinModry.img",
@@ -519,7 +519,7 @@ namespace fishing_cs_revived.src.Data
                 Chance = 1,
                 Weight = 100.0,
                 WeightVar = 80.0, // 20.0 kg – 180.0 kg
-                RodLevel = 9,
+                RodLevel = 20,
                 IsSea = true,
                 PricePerKg = 18,
                 Image = "mesicnikModry.img",
@@ -587,7 +587,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.1,
                 RodLevel = 0,
                 IsSea = false,
-                PricePerKg = 50000,
+                PricePerKg = 100000,
                 Image = "zlataRybka.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
@@ -600,7 +600,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.03, // 0.02 kg – 0.08 kg
                 RodLevel = 4,
                 IsSea = true,
-                PricePerKg = 5000,
+                PricePerKg = 200000,
                 Image = "morskyKonik.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -612,7 +612,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 0.3, // 0.2 kg – 0.8 kg
                 RodLevel = 7,
                 IsSea = true,
-                PricePerKg = 1000,
+                PricePerKg = 20000,
                 Image = "lvicekOhnivy.img",
                 AvaiableLocations = [FishLocation.Sea]
             },
@@ -636,7 +636,7 @@ namespace fishing_cs_revived.src.Data
                 WeightVar = 1000.0, // 500.0 kg – 2500.0 kg
                 RodLevel = 10,
                 IsSea = true,
-                PricePerKg = 8,
+                PricePerKg = 16,
                 Image = "zralokVelrybi.img",
                 AvaiableLocations = [FishLocation.DeepSea]
             }
