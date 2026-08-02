@@ -633,8 +633,8 @@ namespace fishing_cs_revived.src
                                 FishRarity.Common => 50,
                                 FishRarity.Rare => 15,
                                 FishRarity.Epic => 10,
-                                FishRarity.Mythic => 7,
-                                FishRarity.Kraken => 5,
+                                FishRarity.Mythic => 5,
+                                FishRarity.Kraken => 3,
                                 _ => 0
                             } == 0)
                                 catchingOffset += catchingVel;  // If passed, move the green part
