@@ -1,11 +1,19 @@
 namespace fishing_cs_revived.src.Data
-{    public enum FishRarity
+{
+    public enum FishRarity
     {
         Common,
         Rare,
         Epic,
         Mythic,
         Special,
+    }
+
+    public enum FishLocation
+    {
+        Lake,
+        Sea,
+        DeepSea,
     }
 
     public class TFish // The "TemplateFish".
@@ -18,5 +26,6 @@ namespace fishing_cs_revived.src.Data
         public required string Image;
         public required FishRarity Rarity;
         public required double PricePerKg;
+        public required FishLocation[] AvaiableLocations;
     }
 }
