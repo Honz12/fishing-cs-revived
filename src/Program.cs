@@ -14,6 +14,7 @@ namespace fishing_cs_revived.src
         public ushort RodLevel = 0;
         public byte InventorySize = 0;
         public byte HouseLevel = 0;
+        public byte LocationUpgrade = 0;
 
         public List<Fish> Inventory = new();
 
@@ -23,6 +24,8 @@ namespace fishing_cs_revived.src
         public List<string> UnlockedAdvancementIds = [];
 
         public List<int> UnlockedFishIds = [];
+
+        public FishLocation CurrentLocation = FishLocation.Lake;
     }
 
     public class Program
@@ -125,6 +128,14 @@ namespace fishing_cs_revived.src
             FishRarity.Epic => " Epická ",
             FishRarity.Mythic => " Mytická ",
             FishRarity.Special => " Speciální ",
+            _ => throw new NotImplementedException()
+        };
+
+        public static string GetTransLocation(FishLocation l) => l switch
+        {
+            FishLocation.Lake => "Sladká voda",
+            FishLocation.Sea => "Moře",
+            FishLocation.DeepSea => "Hluboké moře",
             _ => throw new NotImplementedException()
         };
 
@@ -744,7 +755,7 @@ namespace fishing_cs_revived.src
             successfullyCatchingTicks = 0;
             catchingCenterSize = Rng.Next(10, 20);
             requiredCatchingTicks = (uint)Rng.Next(20, 50);
-            catchingFishId = TFishFinder.FindRandomFish(data.RodLevel);
+            catchingFishId = TFishFinder.FindRandomFish(data.RodLevel, data.CurrentLocation);
             catchingFish = new Fish(catchingFishId);
             catchingOffset = 0;
             if ((int) catchingFish.Rarity >= (int) FishRarity.Rare)

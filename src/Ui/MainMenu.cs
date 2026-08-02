@@ -1,3 +1,5 @@
+using fishing_cs_revived.src.Data;
+
 namespace fishing_cs_revived.src.Ui
 {
     public class MainMenu
@@ -43,6 +45,11 @@ namespace fishing_cs_revived.src.Ui
                 Console.WriteLine("  Otevřít Katalog");
 
             if (selected == 5)
+                Console.WriteLine($"> Změnít lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
+            else
+                Console.WriteLine($"  Změnít lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
+
+            if (selected == 6)
                 Console.WriteLine("> Uložit a Ukončit");
             else
                 Console.WriteLine("  Uložit a Ukončit");
@@ -54,8 +61,8 @@ namespace fishing_cs_revived.src.Ui
         public static void UiButtonMenuDown()
         {
             selected++;
-            selected += 6;
-            selected %= 6;
+            selected += 7;
+            selected %= 7;
         }
 
         /// <summary>
@@ -64,8 +71,8 @@ namespace fishing_cs_revived.src.Ui
         public static void UiButtonMenuUp()
         {
             selected--;
-            selected += 6;
-            selected %= 6;
+            selected += 7;
+            selected %= 7;
         }
 
         /// <summary>
@@ -83,7 +90,8 @@ namespace fishing_cs_revived.src.Ui
                 case 2: playerData.GameState = GameState.Inventory; InventoryUi.Selected = 0; break;
                 case 3: playerData.GameState = GameState.Advancements; AdvancementUi.Selected = 0; break;
                 case 4: playerData.GameState = GameState.Catalog; break;
-                case 5:
+                case 5: playerData.CurrentLocation++; playerData.CurrentLocation = (FishLocation) ((int) playerData.CurrentLocation % (playerData.LocationUpgrade + 1)); break;
+                case 6:
                     if (!SaveGameHandler.SaveGame(playerData))
                     {
                         Console.Write("Uložení nebylo úspěšné, ale pořád můžes opustit hru, pokud stiskneš Q");

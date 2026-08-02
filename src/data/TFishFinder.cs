@@ -7,7 +7,7 @@ namespace fishing_cs_revived.src.Data
         /// </summary>
         /// <param name="rodLevel">Player's Fishing Rod level.</param>
         /// <returns>The fish Id</returns>
-        public static int FindRandomFish(int rodLevel)
+        public static int FindRandomFish(int rodLevel, FishLocation location)
         {
             List<int> possible = new List<int>();
 
@@ -15,7 +15,7 @@ namespace fishing_cs_revived.src.Data
             {
                 TFish fish = FishData.fishes[i];
 
-                if (rodLevel >= fish.RodLevel)
+                if (rodLevel >= fish.RodLevel && fish.AvaiableLocations.Contains(location))
                     possible.Add(i);
             }
 

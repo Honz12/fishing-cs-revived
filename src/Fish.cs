@@ -19,6 +19,7 @@ namespace fishing_cs_revived.src
         public double PricePerKg;
         public double AverageWeight;
         public int Id;
+        public FishLocation[] AvaiableLocations;
 
         public Fish(int id) // Constructor
         {
@@ -33,6 +34,7 @@ namespace fishing_cs_revived.src
             PricePerKg = template.PricePerKg;
             AverageWeight = template.Weight;
             Id = id;
+            AvaiableLocations = template.AvaiableLocations;
         }
 
         public Fish() // Slop Constructor
@@ -45,6 +47,7 @@ namespace fishing_cs_revived.src
             Rarity = FishRarity.Common;
             PricePerKg = 0.0;
             Id = -1;
+            AvaiableLocations = [];
         }
 
         /// <summary>
@@ -55,8 +58,16 @@ namespace fishing_cs_revived.src
         public string GetFormatedData()
         {
             string isFromSea = IsSea ? "Mořská" : "Sladkovodní";
+            string locationsString = "";
 
-            string s = $"{Name}\n- Váha: {Weight} Kg (Průměr {AverageWeight} Kg)\n- {isFromSea}\n- Vzácnost: {Program.GetTransRarity(Rarity)}\n- Požadovaná úroveň prutu: {RodLevel+1}\n- Prodává se za: {(uint) (PricePerKg * Weight * Program.GetMoneyMultiplier())}";
+            foreach (FishLocation loc in AvaiableLocations)
+            {
+                if (locationsString.Length != 0)
+                    locationsString += ", ";
+                locationsString += $"{Program.GetTransLocation(loc)}";
+            }
+
+            string s = $"{Name}\n- Váha: {Weight} Kg (Průměr {AverageWeight} Kg)\n- {isFromSea}\n- Vzácnost: {Program.GetTransRarity(Rarity)}\n- Požadovaná úroveň prutu: {RodLevel+1}\n- Vyskytuje se v: {locationsString}\n- Prodává se za: {(uint) (PricePerKg * Weight * Program.GetMoneyMultiplier())}";
 
             if (Program.GetMoneyMultiplier() != 1.0)
             {
@@ -73,7 +84,7 @@ namespace fishing_cs_revived.src
         /// <returns>The formated string.</returns>
         public string GetInfoCompact()
         {
-            return $"{Name, -20} | Váha: {Weight, -6} Kg | {Program.GetTransRarity(Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(Rarity).Length)} | Cena: {(uint) (PricePerKg * Weight)}";
+            return $"{Name, -20} | Váha: {Weight, -6} Kg | {Program.GetTransRarity(Rarity) + Program.RepeatString(" ", 12 - Program.GetTransRarityNoColor(Rarity).Length)} | Cena: {(uint) (PricePerKg * Weight * Program.GetMoneyMultiplier())}";
         }
 
         /// <summary>

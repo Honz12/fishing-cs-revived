@@ -8,6 +8,7 @@ namespace fishing_cs_revived.src
         public ushort RodLevel = 0;
         public byte InventorySize = 0;
         public byte HouseLevel = 0;
+        public byte LocationUpgrade = 0;
 
         public List<FishSaveData> Inventory = [];
 
@@ -38,6 +39,7 @@ namespace fishing_cs_revived.src
                 RodLevel = playerData.RodLevel,
                 InventorySize = playerData.InventorySize,
                 HouseLevel = playerData.HouseLevel,
+                LocationUpgrade = playerData.LocationUpgrade,
 
                 Advancements = playerData.Advancements,
                 UnlockedAdvancementIds = playerData.UnlockedAdvancementIds,
@@ -85,6 +87,7 @@ namespace fishing_cs_revived.src
                 playerData.RodLevel = saveFile.RodLevel;
                 playerData.InventorySize = saveFile.InventorySize;
                 playerData.HouseLevel = saveFile.HouseLevel;
+                playerData.LocationUpgrade = saveFile.LocationUpgrade;
 
                 playerData.Inventory = [];
 
