@@ -16,7 +16,12 @@ namespace fishing_cs_revived.src.Data
                 TFish fish = FishData.fishes[i];
 
                 if (rodLevel >= fish.RodLevel && fish.AvaiableLocations.Contains(location))
-                    possible.Add(i);
+                {
+                    for (int j = 0; j < fish.Chance; j++)
+                    {
+                        possible.Add(i);
+                    }
+                }
             }
 
             return possible[Program.Rng.Next(0, possible.Count)];
