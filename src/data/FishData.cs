@@ -208,7 +208,7 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 3,
                 IsSea = false,
                 PricePerKg = 45,
-                Image = "bolenDravey.img",
+                Image = "bolenDravy.img",
                 AvaiableLocations = [FishLocation.Lake]
             },
             new TFish() {
