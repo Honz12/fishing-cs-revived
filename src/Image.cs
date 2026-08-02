@@ -30,12 +30,12 @@ namespace fishing_cs_revived.src
             string contents;
             try
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "images", type, name);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images", type, name);
                 contents = File.ReadAllText(path);
             }
             catch
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "images", "fish", "uhorRicniEletricky.img");
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images", "fish", "uhorRicniEletricky.img");
                 contents = File.ReadAllText(path);
             }
 

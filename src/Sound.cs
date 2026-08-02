@@ -25,7 +25,7 @@ namespace fishing_cs_revived.src
 
         public static void PlayAudioFile(string name)
         {
-            PlaySoundRawPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "audio", name));
+            PlaySoundRawPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "audio", name));
         }
     }
 }
