@@ -26,11 +26,11 @@ fi
 
 echo "=== Sestavuji Linux (linux-x64) ==="
 "$DOTNET" publish "$PROJECT" -c Release -r linux-x64 --self-contained true \
-    -p:PublishSingleFile=true -p:PublishTrimmed=false -o "$LINUX_DIR"
+    -p:PublishSingleFile=true -p:PublishTrimmed=false -p:IncludeAllContentForSelfExtract=true -o "$LINUX_DIR"
 
 echo "=== Sestavuji Windows (win-x64) ==="
 "$DOTNET" publish "$PROJECT" -c Release -r win-x64 --self-contained true \
-    -p:PublishSingleFile=true -p:PublishTrimmed=false -o "$WINDOWS_DIR"
+    -p:PublishSingleFile=true -p:PublishTrimmed=false -p:IncludeAllContentForSelfExtract=true -o "$WINDOWS_DIR"
 
 # Launcher pro Linux: poklik v souborovem manazeru jinak spusti hru bez terminalu
 cat > "$LINUX_DIR/spustit.sh" <<'EOF'

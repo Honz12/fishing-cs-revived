@@ -28,10 +28,10 @@ if exist "%BUILD_DIR%" (
 )
 
 echo === Sestavuji Windows (win-x64) ===
-dotnet publish "%PROJECT%" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -o "%WINDOWS_DIR%"
+dotnet publish "%PROJECT%" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -p:IncludeAllContentForSelfExtract=true -o "%WINDOWS_DIR%"
 
 echo === Sestavuji Linux (linux-x64) ===
-dotnet publish "%PROJECT%" -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -o "%LINUX_DIR%"
+dotnet publish "%PROJECT%" -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -p:IncludeAllContentForSelfExtract=true -o "%LINUX_DIR%"
 
 echo === Generuji launchery ===
 > "%WINDOWS_DIR%\spustit.bat" echo @echo off
