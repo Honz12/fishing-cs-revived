@@ -126,6 +126,15 @@ class Editor:
         self.redo_stack.clear()
         self.status = f"Opened {path}"
 
+    def create_new(self, path):
+        self.grid = [["0" for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
+        self.filename = path
+        self.cx = 0
+        self.cy = 0
+        self.undo_stack.clear()
+        self.redo_stack.clear()
+        self.status = f"Created {path}"
+
     def paint(self, color):
         if self.grid[self.cy][self.cx] == color:
             return
@@ -525,11 +534,14 @@ def main():
 
     editor = Editor()
     if args.file_path:
-        try:
-            editor.load_file(args.file_path)
-        except (OSError, ValueError) as e:
-            print(f"Error: {e}", file=sys.stderr)
-            sys.exit(1)
+        if os.path.isfile(args.file_path):
+            try:
+                editor.load_file(args.file_path)
+            except (OSError, ValueError) as e:
+                print(f"Error: {e}", file=sys.stderr)
+                sys.exit(1)
+        else:
+            editor.create_new(args.file_path)
     editor.run()
 
 

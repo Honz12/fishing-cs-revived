@@ -28,6 +28,7 @@ namespace fishing_cs_revived.src.Ui
         save                            Saves the game to the save file.
         load                            Loads the game from the save file.
         shut                            Shuts off the game with no saving.
+        imgtest                         Prints all images in src/assets/images/
 ";
 
         public static void Enter(PlayerData playerData)
@@ -117,6 +118,33 @@ namespace fishing_cs_revived.src.Ui
                         case "shut":
                             Console.CursorVisible = true;
                             Environment.Exit(0);
+                            break;
+                        case "imgtest":
+                            {
+                                string searchPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images");
+
+                                if (Directory.Exists(searchPath))
+                                {
+                                    // Search pattern "*.img" finds only .img files recursively
+                                    var imgFiles = Directory.EnumerateFiles(searchPath, "*.img", SearchOption.AllDirectories);
+
+                                    foreach (string filePath in imgFiles)
+                                    {
+                                        // Instantiate your Image class
+                                        Image img = new Image(filePath);
+
+                                        // Use the filename without extension as a default description
+                                        string description = filePath;
+
+                                        // Call your DisplayImage method
+                                        Program.DisplayImage(img, description);
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Path not found: {searchPath}");
+                                }
+                            }
                             break;
                     }
                     break;

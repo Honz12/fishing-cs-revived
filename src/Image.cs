@@ -63,5 +63,41 @@ namespace fishing_cs_revived.src
                     x++;
                 }
         }
+
+        public Image(string path) // The constructor
+        {
+            string contents;
+            try
+            {
+                contents = File.ReadAllText(path);
+                Failed = false;
+            }
+            catch
+            {
+                contents = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images", "fish", "uhorRicniEletricky.img"));
+                Failed = true;
+            }
+
+            colors = new byte[16, 16];
+
+                int x = 0;
+                int y = 0;
+
+                foreach (char c in contents)
+                {
+                    if (c == '\n')
+                    {
+                        y++;
+                        x = 0;
+                        continue;
+                    }
+                    if (c == '\r')
+                    {
+                        continue;
+                    }
+                    colors[x, y] = ConvertColorHexToByte(c);
+                    x++;
+                }
+        }
     }
 }
