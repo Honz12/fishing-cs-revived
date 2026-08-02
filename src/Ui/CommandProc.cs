@@ -136,13 +136,29 @@ namespace fishing_cs_revived.src.Ui
                             {
                                 if (parts[1] == "list")
                                 {
+                                    int sLoaded = 0;
+
                                     Console.WriteLine("Available fish:");
-                                    Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |" + "\x1b[0m");
+                                    Console.WriteLine(Program.TITLE_COLOR + "\x1b[1m" + "|  ID  |         NAME         |    RARITY    |    WEIGHT   | WEIGHT VAR |       LOCATIONS      | IMAGE                   LOADED | CHANCE |" + "\x1b[0m");
                                     for (int i = 0; i < FishData.fishes.Length; i++)
                                     {
                                         TFish fish = FishData.fishes[i];
-                                        Console.WriteLine($"| {i, 4} | {fish.Name, 20} | {fish.Rarity, 12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg |");
+
+                                        string locationsString = "";
+
+                                        foreach (FishLocation loc in fish.AvaiableLocations)
+                                        {
+                                            locationsString += loc + " ";
+                                        }
+
+                                        bool successfullyLoadedImage = !new Image("fish", fish.Image).Failed;
+
+                                        if (successfullyLoadedImage)
+                                            sLoaded++;
+
+                                        Console.WriteLine($"| {i, 4} | {fish.Name, -20} | {fish.Rarity, -12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg | {locationsString, -20} | {fish.Image, -24} {successfullyLoadedImage,5} | {fish.Chance, -6} |");
                                     }
+                                    Console.WriteLine($"Successfuly loaded {sLoaded} / {FishData.fishes.Length} images");
                                 }
                             }
                             break;

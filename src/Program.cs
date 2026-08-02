@@ -545,6 +545,14 @@ namespace fishing_cs_revived.src
                         break;
                     case GameState.Catching:
                         {
+                            if (catchingFishId == -1)
+                            {
+                                Console.WriteLine("Nemáš dost dobrý prut, aby jsi tu mohl rybařit.");
+                                Console.ReadKey(true);
+                                data.GameState = GameState.MainMenu;
+                                break;
+                            }
+
                             if (data.Inventory.Count >= GetMaxFishInInventory()) // The capacity limit has been reached.
                             {
                                 Console.WriteLine("Do tvého chladícího boxu se už nic nevejde.");
@@ -756,7 +764,10 @@ namespace fishing_cs_revived.src
             catchingCenterSize = Rng.Next(10, 20);
             requiredCatchingTicks = (uint)Rng.Next(20, 50);
             catchingFishId = TFishFinder.FindRandomFish(data.RodLevel, data.CurrentLocation);
-            catchingFish = new Fish(catchingFishId);
+            if (catchingFishId != -1)
+                catchingFish = new Fish(catchingFishId);
+            else
+                return;
             catchingOffset = 0;
             if ((int) catchingFish.Rarity >= (int) FishRarity.Rare)
             {

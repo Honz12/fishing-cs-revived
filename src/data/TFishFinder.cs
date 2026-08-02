@@ -24,6 +24,11 @@ namespace fishing_cs_revived.src.Data
                 }
             }
 
+            if (possible.Count == 0)
+            {
+                return -1;
+            }
+
             return possible[Program.Rng.Next(0, possible.Count)];
         }
     }

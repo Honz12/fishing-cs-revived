@@ -24,6 +24,7 @@ namespace fishing_cs_revived.src
         };
 
         public byte[,] colors;
+        public bool Failed;
 
         public Image(string type, string name) // The constructor
         {
@@ -32,11 +33,13 @@ namespace fishing_cs_revived.src
             {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images", type, name);
                 contents = File.ReadAllText(path);
+                Failed = false;
             }
             catch
             {
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "assets", "images", "fish", "uhorRicniEletricky.img");
                 contents = File.ReadAllText(path);
+                Failed = true;
             }
 
             colors = new byte[16, 16];
