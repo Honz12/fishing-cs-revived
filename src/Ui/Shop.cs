@@ -3,12 +3,26 @@ namespace fishing_cs_revived.src.Ui
     public class Shop
     {
         public static int selected = 0;
-        private const int TOTAL_OPTIONS = 4;
+        private const int TOTAL_OPTIONS = 5;
 
         // Helper methods for price calculation.
         public static uint GetRodUpgradeCost(ushort currentLevel) => (uint)((currentLevel + 1) * 250);
         public static uint GetInventoryUpgradeCost(byte currentSize) => (uint)((currentSize + 1) * 270);
-        public static uint GetHouseUpgradeCost(byte houseLevel) => (uint)((houseLevel + 1) * 1000);
+        public static uint GetHouseUpgradeCost(byte houseLevel) => (uint)((houseLevel + 1) * 3000);
+        public static uint GetLocationUpgradeCost(byte loc) => loc switch
+        {
+            0 => 5000,
+            1 => 10000,
+            2 => 15000,
+            _ => throw new NotImplementedException()
+        };
+        public static byte GetLocationUpgradeBoatReq(byte loc) => loc switch
+        {
+            0 => 1,
+            1 => 3,
+            2 => 5,
+            _ => throw new NotImplementedException()
+        };
 
         public static void DisplayShop(PlayerData playerData, Image character)
         {
@@ -27,6 +41,8 @@ namespace fishing_cs_revived.src.Ui
             uint rodCost = GetRodUpgradeCost(Program.data.RodLevel);
             uint invCost = GetInventoryUpgradeCost(Program.data.InventorySize);
             uint houseCost = GetHouseUpgradeCost(Program.data.HouseLevel);
+            uint locationCost = GetLocationUpgradeCost(playerData.LocationUpgrade);
+            byte locationReq = GetLocationUpgradeBoatReq(playerData.LocationUpgrade);
 
             // Option 0: Fishing rod upgrade.
             string rodOption;
@@ -64,20 +80,32 @@ namespace fishing_cs_revived.src.Ui
             }
             str += (selected == 2 ? "> " : "  ") + houseOption + "\n";
 
+            // Option 2: Location unlock.
+            string locationOption;
+            if (Program.data.LocationUpgrade >= 2) // If can't unlock more.
+            {
+                locationOption = "Odemknout Lokace - VŠECHNY ODEMČENY";
+            }
+            else
+            {
+                locationOption = $"Odemknout Lokace ({Program.data.LocationUpgrade + 1} / 3) - Cena: {locationCost} korun\n      Potřebná loď {locationReq + 1} nebo lepší.";
+            }
+            str += (selected == 3 ? "> " : "  ") + locationOption + "\n";
+
             // Option 3: Zpět do menu
-            str += (selected == 3 ? "> " : "  ") + "Zpět do hlavního menu" + "\n";
+            str += (selected == 4 ? "> " : "  ") + "Zpět do hlavního menu" + "\n";
 
             Program.DisplayImage(character, str);
 
             Console.WriteLine();
 
-            Program.DisplayMultipleImages( // Display the fishing rod and the boat images.
-                new Image[]
-                {
+            Program.DisplayMultipleImages(
+                [
                     new("rod", $"prut{playerData.RodLevel}.img"),
                     new("ship", $"lod{playerData.InventorySize}.img"),
                     new("houses", $"dum{playerData.HouseLevel}.img"),
-                }
+                    new("locPasses", $"povol{playerData.LocationUpgrade}.img"),
+                ]
             );
         }
 
@@ -149,7 +177,21 @@ namespace fishing_cs_revived.src.Ui
                     }
                     break;
 
-                case 3: // Back To Menu
+                case 3: // Location unlock.
+                    if (playerData.InventorySize >= GetLocationUpgradeBoatReq(playerData.LocationUpgrade))
+                    if (playerData.LocationUpgrade < 3)
+                    {
+                        uint locationCost = GetLocationUpgradeCost(playerData.LocationUpgrade);
+                        if (playerData.Money >= locationCost)
+                        {
+                            playerData.Money -= locationCost;
+                            playerData.LocationUpgrade++;
+                            Sound.PlayAudioFile("buy.wav");
+                        }
+                    }
+                    break;
+
+                case 4: // Back To Menu
                     playerData.GameState = GameState.MainMenu;
                     break;
             }
