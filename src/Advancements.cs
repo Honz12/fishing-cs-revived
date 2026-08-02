@@ -25,7 +25,7 @@ namespace fishing_cs_revived.src
 
             foreach (Fish fish in Program.data.Inventory)
             {
-                if (fish.Rarity == FishRarity.Special)
+                if (fish.Rarity == FishRarity.Special && fish.Name == "Kraken")
                 {
                     hasKraken = true;
                     break;
@@ -55,7 +55,7 @@ namespace fishing_cs_revived.src
                     Id = "poradnyPrut"
                 };
             }
-            
+
             else if (Program.data.HouseLevel == 1 && !playerData.UnlockedAdvancementIds.Contains("domaNejlip"))
             {
                 playerData.UnlockedAdvancementIds.Add("domaNejlip");
@@ -67,7 +67,7 @@ namespace fishing_cs_revived.src
                     Id = "domaNejlip"
                 };
             }
-            
+
             else if (hasKraken && !playerData.UnlockedAdvancementIds.Contains("chytKrakena"))
             {
                 playerData.UnlockedAdvancementIds.Add("chytKrakena");
@@ -79,7 +79,7 @@ namespace fishing_cs_revived.src
                     Id = "chytKrakena"
                 };
             }
-            
+
             else if (Program.data.HouseLevel >= 4 && !playerData.UnlockedAdvancementIds.Contains("tatuvTelefonat"))
             {
                 playerData.UnlockedAdvancementIds.Add("tatuvTelefonat");
@@ -104,7 +104,7 @@ namespace fishing_cs_revived.src
                 };
             }
 
-            return null; 
+            return null;
         }
     }
 }
