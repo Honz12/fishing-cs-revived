@@ -157,12 +157,9 @@ namespace fishing_cs_revived.src.Ui
                                 bool success = int.TryParse(parts[1], out int v);
 
                                 if (success)
-                                {
-                                    data!.Money = (uint) Math.Max(0, v);
-                                    Console.WriteLine($"Money set to {data!.Money}.");
-                                }
-                                else
-                                    Console.WriteLine("Invalid amount.");
+                                    data!.Money = (uint)v;
+                                Console.WriteLine($"Money set to {data!.Money}.");
+
                             }
                             break;
                         case "fish":
@@ -189,7 +186,7 @@ namespace fishing_cs_revived.src.Ui
                                         if (successfullyLoadedImage)
                                             sLoaded++;
 
-                                        Console.WriteLine($"| {i, 4} | {fish.Name, -20} | {fish.Rarity, -12} | {fish.Weight, 8} kg | {fish.WeightVar, 7} kg | {locationsString, -20} | {fish.Image, -24} {successfullyLoadedImage,5} | {fish.Chance, -6} |");
+                                        Console.WriteLine($"| {i,4} | {fish.Name,-20} | {fish.Rarity,-12} | {fish.Weight,8} kg | {fish.WeightVar,7} kg | {locationsString,-20} | {fish.Image,-24} {successfullyLoadedImage,5} | {fish.Chance,-6} |");
                                     }
                                     Console.WriteLine($"Successfuly loaded {sLoaded} / {FishData.fishes.Length} images");
                                 }
@@ -209,7 +206,7 @@ namespace fishing_cs_revived.src.Ui
                                 {
                                     if (success)
                                     {
-                                        data!.RodLevel = (ushort) v;
+                                        data!.RodLevel = (ushort)v;
                                         Console.WriteLine($"Rod level set to {data!.RodLevel}.");
                                     }
                                     else
@@ -220,7 +217,7 @@ namespace fishing_cs_revived.src.Ui
                                 {
                                     if (success)
                                     {
-                                        data!.InventorySize = (byte) v;
+                                        data!.InventorySize = (byte)v;
                                         Console.WriteLine($"Ship level set to {data!.InventorySize}.");
                                     }
                                     else
@@ -231,7 +228,7 @@ namespace fishing_cs_revived.src.Ui
                                 {
                                     if (success)
                                     {
-                                        data!.HouseLevel = (byte) v;
+                                        data!.HouseLevel = (byte)v;
                                         Console.WriteLine($"House level set to {data!.HouseLevel}.");
                                     }
                                     else
@@ -292,7 +289,7 @@ namespace fishing_cs_revived.src.Ui
                                 }
                                 else if (parts[1] == "rem")
                                 {
-                                    
+
                                     if (parts[2] == "all")
                                     {
                                         for (int i = 0; i < FishData.fishes.Length; i++)
