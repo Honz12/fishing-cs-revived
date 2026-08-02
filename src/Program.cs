@@ -73,6 +73,16 @@ namespace fishing_cs_revived.src
             return input;
         }
 
+        public static bool AskYesNo()
+        {
+            ConsoleKey consoleKey = Console.ReadKey(true).Key;
+            while (!(consoleKey == ConsoleKey.A || consoleKey == ConsoleKey.N || consoleKey == ConsoleKey.Y))
+            {
+                consoleKey = Console.ReadKey(true).Key;
+            }
+            return consoleKey == ConsoleKey.Y || consoleKey == ConsoleKey.A;
+        }
+
         /// <summary>
         /// Gets the translated text with ANSI formatting.
         /// </summary>
@@ -412,11 +422,21 @@ namespace fishing_cs_revived.src
         /// </summary>
         public static void Main()
         {
-            SaveGameHandler.LoadGame(data, false);
-
             DisplayCredits();
         
-            DisplayTragicBackstory();
+            if (SaveGameHandler.LoadGame(data, false))
+            {
+                Console.WriteLine("Na tomto zařízení už máš uloženou hru, načíst? (A/n)");
+                if (!AskYesNo())
+                {
+                    data = new();
+                    DisplayTragicBackstory();
+                }
+            }
+            else
+            {
+                DisplayTragicBackstory();
+            }
 
             shopSeller = new Image("characters", (new string[]
             {
@@ -627,12 +647,7 @@ namespace fishing_cs_revived.src
                                 DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
                                 Console.Write("Ponechat? (A/n)");
                                 Sound.PlayAudioFile("catchSuccessfull.wav");
-                                ConsoleKey consoleKey = Console.ReadKey(true).Key;
-                                while (!(consoleKey == ConsoleKey.A || consoleKey == ConsoleKey.N || consoleKey == ConsoleKey.Y))
-                                {
-                                    consoleKey = Console.ReadKey(true).Key;
-                                }
-                                if (consoleKey == ConsoleKey.A || consoleKey == ConsoleKey.Y)
+                                if (AskYesNo())
                                 {
                                     data.Inventory.Add(catchingFish ?? new Fish());
                                 }

@@ -79,7 +79,6 @@ namespace fishing_cs_revived.src
                 string userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 string saveDir = Path.Combine(userDir, "kjr");
                 string jsonString = File.ReadAllText(Path.Combine(saveDir, "save.json"));
-                Console.WriteLine(jsonString);
                 SaveFileData saveFile = JsonSerializer.Deserialize<SaveFileData>(jsonString, options)!;
 
                 playerData.Money = saveFile.Money;
