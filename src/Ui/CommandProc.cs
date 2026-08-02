@@ -22,7 +22,7 @@ namespace fishing_cs_revived.src.Ui
         fish add all                    Adds all the fish to the player's inventory.
         adv add all                     Adds all the advancements to the player's data.
         adv add <advancement_id>        Adds a specific advancement to the player's data.
-        advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
+        adv ref                         Checks for new advancements and adds them to the player's data if any are found.
         sound                           Toggles sound on or off.
         catalog add <fish_id>           Adds a fish id to the catalog.
         catalog add all                 Adds all the fish to the catalog.
@@ -98,10 +98,6 @@ namespace fishing_cs_revived.src.Ui
                         case "help":
                             Console.Write(helpString);
                             break;
-                        case "advrefresh":
-                            Program.CheckForNewAdvancements();
-                            Console.WriteLine("Advancements refreshed.");
-                            break;
                         case "sound":
                             Program.audioEnabled = !Program.audioEnabled;
                             Console.WriteLine($"Sound is now {(Program.audioEnabled ? "enabled" : "disabled")}.");
@@ -154,6 +150,15 @@ namespace fishing_cs_revived.src.Ui
                 case 2:
                     switch (parts[0])
                     {
+                        case "adv":
+                            {
+                                if (parts[1] == "ref")
+                                {
+                                    Program.CheckForNewAdvancements();
+                                    Console.WriteLine("Advancements refreshed.");
+                                }
+                            }
+                            break;
                         case "money":
                             {
                                 bool success = int.TryParse(parts[1], out int v);
