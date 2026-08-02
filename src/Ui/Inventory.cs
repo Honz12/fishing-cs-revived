@@ -80,7 +80,7 @@ namespace fishing_cs_revived.src.Ui
 
             Selected %= playerData.Inventory.Count;
 
-            playerData.Money += (uint) (playerData.Inventory[Selected].PricePerKg * playerData.Inventory[Selected].Weight);
+            playerData.Money += (uint) (playerData.Inventory[Selected].PricePerKg * playerData.Inventory[Selected].Weight * Program.GetMoneyMultiplier());
 
             playerData.Inventory.RemoveAt(Selected);
             Selected = Math.Max(0, Selected - 1);

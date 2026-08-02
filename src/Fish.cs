@@ -56,7 +56,14 @@ namespace fishing_cs_revived.src
         {
             string isFromSea = IsSea ? "Mořská" : "Sladkovodní";
 
-            return $"{Name}\n- Váha: {Weight} Kg (Průměr {AverageWeight} Kg)\n- {isFromSea}\n- Vzácnost: {Program.GetTransRarity(Rarity)}\n- Požadovaná úroveň prutu: {RodLevel+1}\n- Prodává se za: {(uint) (PricePerKg * Weight)}";
+            string s = $"{Name}\n- Váha: {Weight} Kg (Průměr {AverageWeight} Kg)\n- {isFromSea}\n- Vzácnost: {Program.GetTransRarity(Rarity)}\n- Požadovaná úroveň prutu: {RodLevel+1}\n- Prodává se za: {(uint) (PricePerKg * Weight * Program.GetMoneyMultiplier())}";
+
+            if (Program.GetMoneyMultiplier() != 1.0)
+            {
+                s += $" ({(uint) (PricePerKg * Weight)} x{Program.GetMoneyMultiplier()})";
+            }
+
+            return s;
         }
 
         /// <summary>

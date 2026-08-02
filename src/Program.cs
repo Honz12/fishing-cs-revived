@@ -83,6 +83,19 @@ namespace fishing_cs_revived.src
             return consoleKey == ConsoleKey.Y || consoleKey == ConsoleKey.A;
         }
 
+        public static double GetMoneyMultiplier()
+        {
+            return data.HouseLevel switch
+            {
+                0 => 1.0,
+                1 => 1.1,
+                2 => 1.3,
+                3 => 1.5,
+                4 => 2.0,
+                _ => throw new NotImplementedException()
+            };
+        }
+
         /// <summary>
         /// Gets the translated text with ANSI formatting.
         /// </summary>
