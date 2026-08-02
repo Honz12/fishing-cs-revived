@@ -25,7 +25,7 @@ namespace fishing_cs_revived.src
 
             foreach (Fish fish in Program.data.Inventory)
             {
-                if (fish.Rarity == FishRarity.Kraken)
+                if (fish.Rarity == FishRarity.Special)
                 {
                     hasKraken = true;
                     break;

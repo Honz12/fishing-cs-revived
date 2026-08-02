@@ -108,7 +108,7 @@ namespace fishing_cs_revived.src
             FishRarity.Rare => $"\x1b[30;102m{GetTransRarityNoColor(r)}\x1b[0m",
             FishRarity.Epic => $"\x1b[30;105m{GetTransRarityNoColor(r)}\x1b[0m",
             FishRarity.Mythic => $"\x1b[30;101m{GetTransRarityNoColor(r)}\x1b[0m",
-            FishRarity.Kraken => $"\x1b[30;103m{GetTransRarityNoColor(r)}\x1b[0m",
+            FishRarity.Special => $"\x1b[30;103m{GetTransRarityNoColor(r)}\x1b[0m",
             _ => throw new NotImplementedException()
         };
 
@@ -124,7 +124,7 @@ namespace fishing_cs_revived.src
             FishRarity.Rare => " Neobyčejná ",
             FishRarity.Epic => " Epická ",
             FishRarity.Mythic => " Mytická ",
-            FishRarity.Kraken => " KRAKEN ",
+            FishRarity.Special => " Speciální ",
             _ => throw new NotImplementedException()
         };
 
@@ -634,7 +634,7 @@ namespace fishing_cs_revived.src
                                 FishRarity.Rare => 15,
                                 FishRarity.Epic => 10,
                                 FishRarity.Mythic => 5,
-                                FishRarity.Kraken => 3,
+                                FishRarity.Special => 3,
                                 _ => 0
                             } == 0)
                                 catchingOffset += catchingVel;  // If passed, move the green part

@@ -5,7 +5,7 @@ namespace fishing_cs_revived.src.Data
         Rare,
         Epic,
         Mythic,
-        Kraken,
+        Special,
     }
 
     public class TFish // The "TemplateFish".

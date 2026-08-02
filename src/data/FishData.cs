@@ -246,7 +246,7 @@ namespace fishing_cs_revived.src.Data
             },
             new TFish() {
                 Name = "Kraken",
-                Rarity = FishRarity.Kraken,
+                Rarity = FishRarity.Special,
                 Weight = 1000.0,
                 WeightVar = 100.0, // 900.0 - 1100.0
                 RodLevel = 10,
