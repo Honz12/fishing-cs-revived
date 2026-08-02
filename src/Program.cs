@@ -356,7 +356,7 @@ namespace fishing_cs_revived.src
             SayDad("Ahoj, vím že jsme spolu dlouho nemluvili, ale slyšel jsem, že jsi rozjel vlastní podnik a koupil sis vilu.");
 
             SayDad("Je to pravda?");
-            
+
             SayStory("V tu chvíli si vzpomeneš, jak to celé začalo...");
 
             Sound.PlayAudioFile("endCall.wav");
@@ -454,7 +454,7 @@ namespace fishing_cs_revived.src
         public static void Main()
         {
             DisplayCredits();
-        
+
             if (SaveGameHandler.LoadGame(data, false))
             {
                 Console.WriteLine("Na tomto zařízení už máš uloženou hru, načíst? (A/n)");
@@ -581,6 +581,7 @@ namespace fishing_cs_revived.src
         Program.TITLE_COLOR + @"                   |__/   ";
 
                             Console.WriteLine(title);
+                            Console.WriteLine($"Právě se nacházíš na {data.CurrentLocation}");
                             Console.WriteLine();
 
                             Console.WriteLine(
@@ -776,7 +777,7 @@ namespace fishing_cs_revived.src
             else
                 return;
             catchingOffset = 0;
-            if ((int) catchingFish.Rarity >= (int) FishRarity.Rare)
+            if ((int)catchingFish.Rarity >= (int)FishRarity.Rare)
             {
                 catchingVel = Rng.Next(0, 2) * 2 - 1;
             }
