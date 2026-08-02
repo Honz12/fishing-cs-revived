@@ -19,15 +19,6 @@ namespace fishing_cs_revived.src.Data
         }
     */
 
-     /*
-        Total 22 fish:
-            - Common: 8 (Kapr, Okoun, Lín, Amur, Treska, Sardinka, Sleď, Makrela)
-            - Rare: 8 (Pstruh, Štika, Candát, Sumec, Jeseter, Losos, Platýs, Pražman)
-            - Epic: 3 (Úhoř, Mořský ďas, Mečoun)
-            - Mythic: 2 (Tuňák, Čtverzubec)
-            - Kraken: 1
-    */
-
     public class FishData
     {
         public static TFish[] fishes = {
@@ -40,7 +31,8 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 1,
                 PricePerKg = 16,
                 IsSea = false,
-                Image = "kaprObecny.img"
+                Image = "kaprObecny.img",
+                AvaiableLocations = [FishLocation.Lake]
             },
             new TFish() {
                 Name = "Pstruh duhový",
@@ -142,7 +134,8 @@ namespace fishing_cs_revived.src.Data
                 RodLevel = 4,
                 IsSea = true,
                 PricePerKg = 90,
-                Image = "lososObecny.img"
+                Image = "lososObecny.img",
+                AvaiableLocations = [FishLocation.Lake, FishLocation.Sea]
             },
             new TFish() {
                 Name = "Treska tmavá",
