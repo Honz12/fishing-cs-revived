@@ -19,6 +19,14 @@ namespace fishing_cs_revived.src.Data
         }
     */
 
+    /*
+
+        kazda ryba musi mit 
+                AvaiableLocations = [ ..., ..., ... ]
+        muze jich v [] byt kolik chces :D
+        priklady jsou Kapr a Losos
+    */
+
     public class FishData
     {
         public static TFish[] fishes = {
