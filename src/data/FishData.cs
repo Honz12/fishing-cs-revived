@@ -264,6 +264,14 @@ namespace fishing_cs_revived.src.Data
                 Image = "puffer.img",
                 AvaiableLocations = [FishLocation.Sea, FishLocation.DeepSea]
             },
+
+
+
+
+
+
+
+            // Special
             new TFish() {
                 Name = "Kraken",
                 Rarity = FishRarity.Special,
@@ -274,7 +282,22 @@ namespace fishing_cs_revived.src.Data
                 PricePerKg = 11,
                 Image = "kraken.img",
                 AvaiableLocations = [FishLocation.DeepSea]
+            },
+
+            new TFish() {
+                Name = "Zlatá rybka",
+                Rarity = FishRarity.Special,
+                Weight = 0.15,
+                WeightVar = 0.1,
+                RodLevel = 0,
+                IsSea = false,
+                PricePerKg = 50000,
+                Image = "zlataRybka.img",
+                AvaiableLocations = [FishLocation.Lake]
             }
+
+
+
         };
     }
 }
