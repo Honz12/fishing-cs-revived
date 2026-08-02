@@ -4,8 +4,6 @@ namespace fishing_cs_revived.src.Ui
 {
     public class CatalogUi
     {
-        static readonly List<int> unlockedFishIds = [];
-
         private static void DisplayTableRarity(FishRarity rarity)
         {
             Console.WriteLine(Program.TITLE_COLOR + "===== " + Program.GetTransRarity(rarity) + Program.TITLE_COLOR + " =====\x1b[0m");
@@ -21,7 +19,7 @@ namespace fishing_cs_revived.src.Ui
                 if (tFish.Rarity != rarity)
                     continue;
 
-                if (unlockedFishIds.Contains(i))
+                if (Program.data.UnlockedFishIds.Contains(i))
                     line += $"{tFish.Name,-20} | ";
                 else
                     line += $"\x1b[0;90m{unknown,-20}\x1b[0m | ";
@@ -52,7 +50,7 @@ namespace fishing_cs_revived.src.Ui
                 if (tFish.Rarity != FishRarity.Kraken)
                     continue;
 
-                if (unlockedFishIds.Contains(i))
+                if (Program.data.UnlockedFishIds.Contains(i))
                     line += $"{tFish.Name,-20} | ";
                 else
                     line += $"\x1b[0;90m{unknown,-20}\x1b[0m | ";
@@ -87,14 +85,14 @@ namespace fishing_cs_revived.src.Ui
 
         public static void UnlockFish(int fishId)
         {
-            if (!unlockedFishIds.Contains(fishId))
-                unlockedFishIds.Add(fishId);
+            if (!Program.data.UnlockedFishIds.Contains(fishId))
+                Program.data.UnlockedFishIds.Add(fishId);
         }
 
         public static void UnUnlockFish(int fishId)
         {
-            if (unlockedFishIds.Contains(fishId))
-                unlockedFishIds.Remove(fishId);
+            if (Program.data.UnlockedFishIds.Contains(fishId))
+                Program.data.UnlockedFishIds.Remove(fishId);
         }
     }
 }

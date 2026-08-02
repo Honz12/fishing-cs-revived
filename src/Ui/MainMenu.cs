@@ -43,9 +43,9 @@ namespace fishing_cs_revived.src.Ui
                 Console.WriteLine("  Otevřít Katalog");
 
             if (selected == 5)
-                Console.WriteLine("> Opustit Hru");
+                Console.WriteLine("> Uložit a Ukončit");
             else
-                Console.WriteLine("  Opustit Hru");
+                Console.WriteLine("  Uložit a Ukončit");
         }
 
         /// <summary>
@@ -83,7 +83,18 @@ namespace fishing_cs_revived.src.Ui
                 case 2: playerData.GameState = GameState.Inventory; InventoryUi.Selected = 0; break;
                 case 3: playerData.GameState = GameState.Advancements; AdvancementUi.Selected = 0; break;
                 case 4: playerData.GameState = GameState.Catalog; break;
-                case 5: Console.CursorVisible = true; Environment.Exit(0); break;
+                case 5:
+                    if (!SaveGameHandler.SaveGame(playerData))
+                    {
+                        Console.Write("Uložení nebylo úspěšné, ale pořád můžes opustit hru, pokud stiskneš Q");
+                        if (Console.ReadKey(true).Key != ConsoleKey.Q)
+                        {
+                            break;
+                        }
+                    }
+                    Console.CursorVisible = true;
+                    Environment.Exit(0);
+                    break;
             }
         }
     }

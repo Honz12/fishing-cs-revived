@@ -21,6 +21,8 @@ namespace fishing_cs_revived.src
 
         public List<Advancement> Advancements = [];
         public List<string> UnlockedAdvancementIds = [];
+
+        public List<int> UnlockedFishIds = [];
     }
 
     public class Program
@@ -410,6 +412,8 @@ namespace fishing_cs_revived.src
         /// </summary>
         public static void Main()
         {
+            SaveGameHandler.LoadGame(data, false);
+
             DisplayCredits();
         
             DisplayTragicBackstory();

@@ -13,6 +13,8 @@ namespace fishing_cs_revived.src
 
         public List<Advancement> Advancements = [];
         public List<string> UnlockedAdvancementIds = [];
+
+        public List<int> UnlockedFishIds = [];
     }
 
     public class SaveGameHandler
@@ -39,6 +41,8 @@ namespace fishing_cs_revived.src
 
                 Advancements = playerData.Advancements,
                 UnlockedAdvancementIds = playerData.UnlockedAdvancementIds,
+
+                UnlockedFishIds = playerData.UnlockedFishIds
             };
 
             foreach (Fish fish in playerData.Inventory)
@@ -59,6 +63,55 @@ namespace fishing_cs_revived.src
             {
                 Console.WriteLine("Error writing save file");
                 Console.ReadKey();
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Loads the game from ~/kjr/save.json
+        /// </summary>
+        /// <param name="playerData">The player data.</param>
+        /// <returns>The load success.</returns>
+        public static bool LoadGame(PlayerData playerData, bool pauseIfUnsuccessful = true)
+        {
+            try
+            {
+                string userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string saveDir = Path.Combine(userDir, "kjr");
+                string jsonString = File.ReadAllText(Path.Combine(saveDir, "save.json"));
+                Console.WriteLine(jsonString);
+                SaveFileData saveFile = JsonSerializer.Deserialize<SaveFileData>(jsonString, options)!;
+
+                playerData.Money = saveFile.Money;
+                playerData.RodLevel = saveFile.RodLevel;
+                playerData.InventorySize = saveFile.InventorySize;
+                playerData.HouseLevel = saveFile.HouseLevel;
+
+                playerData.Inventory = [];
+
+                playerData.Advancements = saveFile.Advancements;
+                playerData.UnlockedAdvancementIds = saveFile.UnlockedAdvancementIds;
+
+                playerData.UnlockedFishIds = saveFile.UnlockedFishIds;
+
+                foreach (FishSaveData fishSaveData in saveFile.Inventory)
+                {
+                    Fish f = new(fishSaveData.Id)
+                    {
+                        Weight = fishSaveData.Weight
+                    };
+                    playerData.Inventory.Add(f);
+                }
+
+                return true;
+            }
+            catch
+            {
+                if (pauseIfUnsuccessful)
+                {
+                    Console.WriteLine("Error loading save file");
+                    Console.ReadKey();
+                }
             }
             return false;
         }

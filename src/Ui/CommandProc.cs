@@ -25,7 +25,9 @@ namespace fishing_cs_revived.src.Ui
         catalog add all                 Adds all the fish to the catalog.
         catalog rem <fish_id>           Removes a fish id from the catalog.
         catalog rem all                 Removes all the fish from the catalog.
-        save                            Saves the game.
+        save                            Saves the game to the save file.
+        load                            Loads the game from the save file.
+        shut                            Shuts off the game with no saving.
 ";
 
         public static void Enter(PlayerData playerData)
@@ -105,6 +107,16 @@ namespace fishing_cs_revived.src.Ui
                                 Console.WriteLine("Saved successfully.");
                             else
                                 Console.WriteLine("Save failed.");
+                            break;
+                        case "load":
+                            if (SaveGameHandler.LoadGame(data!))
+                                Console.WriteLine("Loaded successfully.");
+                            else
+                                Console.WriteLine("Load failed.");
+                            break;
+                        case "shut":
+                            Console.CursorVisible = true;
+                            Environment.Exit(0);
                             break;
                     }
                     break;
