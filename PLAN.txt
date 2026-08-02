@@ -4,14 +4,10 @@ Tohle je plán pro funkce Kde Jsou Ryby
 	DONE
 
 - Udělat systém lokací
-	- Každá lokace má exkluzivní ryby
-	- Odemikají se penězi
-	- Skákání mezi lokacemi
+	DONE
 
 - Udělat katalog ryb
-	- Nová možnost v Hlavním Menu
-	- Ukazuje všechny objevené ryby
-	- Ukazuje kolik ryb není objevených
+	DONE
 
 - Udělat advancmenty
 	DONE
