@@ -16,6 +16,9 @@ namespace fishing_cs_revived.src
         public byte HouseLevel = 0;
         public byte LocationUpgrade = 0;
 
+        public uint FishCaughtCount = 0;
+        public ulong TotalMoneyEarned = 0;
+
         public List<Fish> Inventory = new();
 
         public GameState GameState = GameState.BootScreen;
@@ -239,6 +242,7 @@ namespace fishing_cs_revived.src
         /// <summary>
         /// Displays multiple images in a row,
         /// with one character gaps between them.
+        /// Images that failed to load are skipped.
         /// </summary>
         /// <param name="images">The images to be displayed.</param>
         public static void DisplayMultipleImages(Image[] images)
@@ -249,6 +253,9 @@ namespace fishing_cs_revived.src
 
                 for (int i = 0; i < images.Length; i++)
                 {
+                    if (images[i].Failed)
+                        continue;
+
                     for (int x = 0; x < 16; x++)
                     {
                         byte upper = images[i].colors[x, y];
@@ -534,7 +541,6 @@ namespace fishing_cs_revived.src
                                 case ConsoleKey.Spacebar:
                                 case ConsoleKey.Enter:
                                     Shop.EnterOption(data);
-                                    Console.WriteLine(data.HouseLevel);
                                     CheckForNewAdvancements();
                                     break;
                                 case ConsoleKey.Escape:
@@ -675,6 +681,7 @@ namespace fishing_cs_revived.src
                             else if (successfullyCatchingTicks >= requiredCatchingTicks) // If player successfully reached the goal, we give the win condition
                             {
                                 CatalogUi.UnlockFish(catchingFishId);
+                                data.FishCaughtCount++;
                                 Console.WriteLine("Chytil jsi:");
                                 DisplayImage((catchingFish ?? new Fish()).Image, (catchingFish ?? new Fish()).GetFormatedData());
                                 Console.Write("Ponechat? (A/n)");

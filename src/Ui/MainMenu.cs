@@ -45,9 +45,9 @@ namespace fishing_cs_revived.src.Ui
                 Console.WriteLine("  Otevřít Katalog");
 
             if (selected == 5)
-                Console.WriteLine($"> Změnít lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
+                Console.WriteLine($"> Změnit lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
             else
-                Console.WriteLine($"  Změnít lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
+                Console.WriteLine($"  Změnit lokaci - {Program.GetTransLocation(Program.data.CurrentLocation)} ({(int) Program.data.CurrentLocation + 1} / {Program.data.LocationUpgrade + 1})");
 
             if (selected == 6)
                 Console.WriteLine("> Uložit a Ukončit");

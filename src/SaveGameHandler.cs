@@ -10,6 +10,9 @@ namespace fishing_cs_revived.src
         public byte HouseLevel = 0;
         public byte LocationUpgrade = 0;
 
+        public uint FishCaughtCount = 0;
+        public ulong TotalMoneyEarned = 0;
+
         public List<FishSaveData> Inventory = [];
 
         public List<Advancement> Advancements = [];
@@ -40,6 +43,9 @@ namespace fishing_cs_revived.src
                 InventorySize = playerData.InventorySize,
                 HouseLevel = playerData.HouseLevel,
                 LocationUpgrade = playerData.LocationUpgrade,
+
+                FishCaughtCount = playerData.FishCaughtCount,
+                TotalMoneyEarned = playerData.TotalMoneyEarned,
 
                 Advancements = playerData.Advancements,
                 UnlockedAdvancementIds = playerData.UnlockedAdvancementIds,
@@ -88,6 +94,9 @@ namespace fishing_cs_revived.src
                 playerData.InventorySize = saveFile.InventorySize;
                 playerData.HouseLevel = saveFile.HouseLevel;
                 playerData.LocationUpgrade = saveFile.LocationUpgrade;
+
+                playerData.FishCaughtCount = saveFile.FishCaughtCount;
+                playerData.TotalMoneyEarned = saveFile.TotalMoneyEarned;
 
                 playerData.Inventory = [];
 

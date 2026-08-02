@@ -19,3 +19,16 @@ Verze se označují jako `VerzeHry.VerzeUpdatu.VerzeTechnickéÚpravy`
 - Přidáno Katalog menu v Hlavním Menu.
 - Přidáno odemikání ryb v katalogu.
 - Přidány `catalog add <>` a `catalog rem <>` příkazy do F1 kontole.
+
+## Verze 3.7.0 - Advancement Update
+
+- Přidáno **16 nových odznaků** (celkem 22).
+    - Odznaky za počet chycených ryb (10 / 100 / 1000).
+    - Odznaky za objevené druhy (10 / 25 / všechny).
+    - Odznaky za celkově vydělané peníze (10 000 / 100 000 / 1 000 000 Kč).
+    - Odznaky za chycení vzácné / epické / mytické ryby.
+    - Odznaky za vylepšení prutu, lodi a obydlí.
+    - Odznaky za odemknutí lokací Moře a Hluboké moře.
+- Přidány statistiky `FishCaughtCount` a `TotalMoneyEarned` (ukládají se do save souboru).
+- Opraven odznak "Co to je?!" - teď se odemkne až po chycení skutečného Krakena.
+- Přidány placeholder ikony pro nové odznaky.

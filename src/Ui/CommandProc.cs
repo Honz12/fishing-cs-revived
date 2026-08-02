@@ -15,10 +15,11 @@ namespace fishing_cs_revived.src.Ui
         help                            Shows the Kde Jsou Ryby!? Debug Command Interface help text.
         money <amount>                  Sets the money of the player.
         upgrade rod <level>             Sets the upgrade level of the fishing rod.
-        upgrade ship <level>            Sets the upgrade level of the shi°+p.
+        upgrade ship <level>            Sets the upgrade level of the ship.
         upgrade house <level>           Sets the upgrade level of the house.
         fish list                       Lists all available fish.
         fish add <fish_id>              Adds a fish to the player's inventory.
+        fish add all                    Adds all the fish to the player's inventory.
         advrefresh                      Checks for new advancements and adds them to the player's data if any are found.
         sound                           Toggles sound on or off.
         catalog add <fish_id>           Adds a fish id to the catalog.
@@ -156,8 +157,12 @@ namespace fishing_cs_revived.src.Ui
                                 bool success = int.TryParse(parts[1], out int v);
 
                                 if (success)
-                                    data!.Money = (uint) v;
+                                {
+                                    data!.Money = (uint) Math.Max(0, v);
                                     Console.WriteLine($"Money set to {data!.Money}.");
+                                }
+                                else
+                                    Console.WriteLine("Invalid amount.");
                             }
                             break;
                         case "fish":
@@ -198,26 +203,39 @@ namespace fishing_cs_revived.src.Ui
                         case "upgrade":
                             {
                                 bool success = int.TryParse(parts[2], out int v);
+                                string error = "Invalid upgrade level.";
 
                                 if (parts[1] == "rod")
                                 {
                                     if (success)
+                                    {
                                         data!.RodLevel = (ushort) v;
                                         Console.WriteLine($"Rod level set to {data!.RodLevel}.");
+                                    }
+                                    else
+                                        Console.WriteLine(error);
                                 }
 
                                 else if (parts[1] == "ship")
                                 {
                                     if (success)
+                                    {
                                         data!.InventorySize = (byte) v;
                                         Console.WriteLine($"Ship level set to {data!.InventorySize}.");
+                                    }
+                                    else
+                                        Console.WriteLine(error);
                                 }
-                                
+
                                 else if (parts[1] == "house")
                                 {
                                     if (success)
+                                    {
                                         data!.HouseLevel = (byte) v;
                                         Console.WriteLine($"House level set to {data!.HouseLevel}.");
+                                    }
+                                    else
+                                        Console.WriteLine(error);
                                 }
                             }
                             break;
@@ -225,6 +243,15 @@ namespace fishing_cs_revived.src.Ui
                             {
                                 if (parts[1] == "add")
                                 {
+                                    if (parts[2] == "all")
+                                    {
+                                        for (int i = 0; i < FishData.fishes.Length; i++)
+                                        {
+                                            data!.Inventory.Add(new Fish(i));
+                                        }
+                                        Console.WriteLine($"Added all {FishData.fishes.Length} fish to inventory.");
+                                        break;
+                                    }
                                     bool success = int.TryParse(parts[2], out int v);
 
                                     if (success)
@@ -235,6 +262,10 @@ namespace fishing_cs_revived.src.Ui
                                             Console.WriteLine("Added fish to inventory.");
                                             Program.DisplayImage(fish.Image, fish.GetFormatedData());
                                         }
+                                        else
+                                            Console.WriteLine($"Fish id must be in range 0 - {FishData.fishes.Length - 1}.");
+                                    else
+                                        Console.WriteLine("Invalid fish id.");
                                 }
                             }
                             break;
