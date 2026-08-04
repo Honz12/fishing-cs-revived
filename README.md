@@ -8,22 +8,39 @@ Tento projekt je založený na `Honz12/fishing-cs-hackathon`
 
 **Kde Jsou Ryby?!** je konzolová textová rybářská hra napsaná v C# s barevnou ANSI grafikou přímo v terminálu. Chytej ryby, vylepšuj vybavení a dokaž tátovi, že rybaření má smysl!
 
+![Úvodní obrazovka](screenshots/boot.png)
+
+---
+
+## 📸 Ukázky ze hry
+
+| | |
+|---|---|
+| ![Hlavní menu](screenshots/mainmenu.png) | ![Chytání ryb](screenshots/catching.png) |
+| ![Obchod](screenshots/shop.png) | ![Chladicí box](screenshots/inventory.png) |
+| ![Odznaky](screenshots/advancements.png) | ![Katalog ryb](screenshots/catalog.png) |
+
+*Přehled obrazovek hry — hlavní menu, minihra rybaření, obchod, chladicí box, odznaky a katalog ryb.*
+
 ---
 
 ## 📖 O hře
 
 Hráč se ocitá v roli mladého rybáře, který se rozhodne jít za svým snem i přes otcovo nesouhlas. Pomocí minihry s pohybujícím se kurzorem chytáš ryby, které se zobrazují jako **16×16 pixelové ANSI obrázky** — přímo v terminálu!
 
-Hra obsahuje **20+ druhů ryb** (sladkovodní i mořské) + tajný **Kraken**, každá s vlastní vahou, raritou a požadavky na výbavu.
+Hra obsahuje **50 druhů ryb** (sladkovodní, mořské a z hlubokého moře) + tajný **Kraken**, každá s vlastní vahou, raritou a požadavky na výbavu.
 
 ### Herní smyčka
 
 ```
 Hlavní menu
  ├── 🎣 Jít chytat ryby — minihra s pohyblivým ukazatelem
- ├── 🏪 Jít do obchodu — nákup vylepšení (prut, loď, dům)
+ ├── 🏪 Jít do obchodu — nákup vylepšení (prut, loď, dům, lokace)
  ├── 📦 Chladicí box — přehled a prodej chycených ryb
- └── 🚪 Opustit hru
+ ├── 🏅 Otevřít Odznaky — sbírka odznaků za úspěchy
+ ├── 📖 Otevřít Katalog — přehled objevených druhů ryb
+ ├── 🗺️ Změnit lokaci — Sladká voda / Moře / Hluboké moře
+ └── 💾 Uložit a Ukončit
 ```
 
 ### 🎮 Minihra
@@ -42,8 +59,8 @@ Rybaření probíhá v reálném čase:
 | Běžná | ⬜ | Kapr, Okoun, Lín |
 | Neobyčejná | 🟩 | Pstruh, Štika, Candát |
 | Epická | 🟪 | Úhoř, Mořský ďas, Mečoun |
-| Mytická | 🟥 | Tuňák, Čtverzubec fugu |
-| KRAKEN | 🟨 | Kraken 🦑 |
+| Mytická | 🟥 | Vyza, Tuňák, Žralok bílý |
+| Speciální | 🟨 | Kraken 🦑, Zlatá rybka, Mořský koník |
 
 ### 🛒 Obchod
 
@@ -53,7 +70,8 @@ V obchodě můžeš utrácet peníze za:
 |---|---|---|
 | 🎣 **Prut** | 11 (0–10) | Odemyká vzácnější ryby |
 | 🚢 **Loď** | 5 (0–4) | Zvětšuje chladicí box |
-| 🏠 **Obydlí** | 5 (0–4) | Postup v příběhu |
+| 🏠 **Obydlí** | 5 (0–4) | Postup v příběhu, větší výdělek |
+| 🗺️ **Lokace** | 3 | Odemyká Moře a Hluboké moře (vyžaduje loď) |
 
 Po koupi vily (obydlí úroveň 5) se odemkne **závěrečná scéna**.
 
@@ -70,8 +88,8 @@ Po koupi vily (obydlí úroveň 5) se odemkne **závěrečná scéna**.
 
 ```bash
 # Naklonovat repozitář
-git clone https://github.com/Honz12/fishing-cs-hackathon.git
-cd fishing-cs-hackathon
+git clone https://github.com/Honz12/fishing-cs-revived.git
+cd fishing-cs-revived
 
 # Spustit hru
 dotnet run
@@ -109,22 +127,31 @@ Pro vývojáře a odvážné hráče:
 ```
 src/
 ├── Program.cs          — Hlavní smyčka hry, vykreslování, minihra
-├── MainMenu.cs         — Hlavní menu
-├── CommandProc.cs      — Debug konzole (F1)
-├── Shop.cs             — Obchod a vylepšení
-├── Inventory.cs        — Chladicí box
+├── Advancements.cs     — Odznaky a jejich podmínky
+├── SaveGameHandler.cs  — Ukládání a načítání hry (~/kjr/save.json)
+├── Sound.cs            — Přehrávání zvukových efektů
 ├── Fish.cs             — Třída ryby
 ├── Image.cs            — Načítání a vykreslování ANSI grafiky
+├── Ui/
+│   ├── MainMenu.cs     — Hlavní menu
+│   ├── CommandProc.cs  — Debug konzole (F1)
+│   ├── Shop.cs         — Obchod a vylepšení
+│   ├── Inventory.cs    — Chladicí box
+│   ├── AdvancementUi.cs— Obrazovka odznaků
+│   └── CatalogUi.cs    — Katalog ryb
 ├── data/
-│   ├── TFish.cs        — Šablona ryby a enum FishRarity
+│   ├── TFish.cs        — Šablona ryby a enum FishRarity / FishLocation
 │   ├── TFishFinder.cs  — Náhodný výběr ryby
 │   └── FishData.cs     — Databáze všech ryb
-└── images/
-    ├── fish/            — 16×16 pixel art ryb (.txt)
-    ├── rod/             — Obrázky prutů
-    ├── ship/            — Obrázky lodí
-    ├── characters/      — Obrázky postav (prodavači)
-    └── houses/          — Obrázky obydlí
+└── assets/
+    ├── audio/          — Zvukové efekty (.wav)
+    └── images/
+        ├── fish/       — 16×16 pixel art ryb (.img)
+        ├── rod/        — Obrázky prutů
+        ├── ship/       — Obrázky lodí
+        ├── characters/ — Obrázky postav (prodavači)
+        ├── houses/     — Obrázky obydlí
+        └── advancements/ — Ikony odznaků
 ```
 
 ---
